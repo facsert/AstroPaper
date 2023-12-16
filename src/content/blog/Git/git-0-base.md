@@ -12,8 +12,6 @@ description:
   theme.
 ---
 
-# Git Base
-
 ```bash
  * @Author       : facsert
  * @Date         : 2023-05-23 15:28:43
