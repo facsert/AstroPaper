@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - bash
-description: "Bash branch"
+description: "Bash 函数"
 ---
 
 <!--

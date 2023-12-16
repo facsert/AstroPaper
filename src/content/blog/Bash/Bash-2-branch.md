@@ -1,13 +1,13 @@
 ---
 author: facsert
-pubDatetime: 2023-07-07 17:44:44
+pubDatetime: 2022-07-03 17:44:44
 title: Bash Branch
 postSlug: ""
 featured: false
 draft: false
 tags:
   - bash
-description: "Bash branch"
+description: "Bash 条件分支"
 ---
 
 <!--

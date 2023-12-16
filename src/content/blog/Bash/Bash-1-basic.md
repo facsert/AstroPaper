@@ -1,13 +1,13 @@
 ---
 author: facsert
-pubDatetime: 2022-08-09 21:20:45
+pubDatetime: 2022-07-03 21:20:45
 title: BASH Basic
 postSlug: ""
 featured: false
 draft: false
 tags:
   - bash
-description: "Bash basic"
+description: "Bash 基本语法"
 ---
 
 <!--

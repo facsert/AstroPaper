@@ -1,25 +1,21 @@
 ---
 author: facsert
-pubDatetime: 2023-05-23 15:28:43
+pubDatetime: 2022-07-08 10:17:53
 title: Git Remote Repository
 postSlug: ""
 featured: true
 draft: false
 tags:
   - git
-description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+description: "Git 远端仓库"
 ---
 
-# Git Remote repository
-
-```bash
+<!--
  * @Author       : facsert
- * @Date         : 2023-05-23 15:28:43
- * @LastEditTime: 2023-12-15 23:01:55
+ * @Date         : 2022-07-08 10:17:53
+ * @LastEditTime : 2022-12-15 23:01:55
  * @Description  : edit description
-```
+-->
 
 ## 介绍
 

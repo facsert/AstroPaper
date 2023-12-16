@@ -1,15 +1,13 @@
 ---
 author: facsert
-pubDatetime: 2023-05-23 15:28:43
-title: Node export
-postSlug: Node base export
+pubDatetime: 2023-11-18 18:30:59
+title: NodeJS export
+postSlug: ""
 featured: true
 draft: false
 tags:
-  - node
-description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+  - NodeJS
+description: "NodeJS 模块引入和导出"
 ---
 
 <!--
@@ -19,8 +17,6 @@ description:
  * @LastEditors: facsert
  * @Description:
 -->
-
-# 模块
 
 早期历史原因, javascript 划分了 commonjs 模块和 EMCAScript 模块, 两种模块的导出和引入方式统统
 

@@ -1,25 +1,21 @@
 ---
 author: facsert
-pubDatetime: 2023-05-23 15:28:43
+pubDatetime: 2022-07-08 10:17:53
 title: Git Local Repository
 postSlug: ""
 featured: true
 draft: false
 tags:
   - git
-description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+description: "Git 本地仓库"
 ---
 
-# Git Local Repository
-
-```bash
+<!--
  * @Author       : facsert
- * @Date         : 2023-05-23 15:28:43
- * @LastEditTime: 2023-12-15 23:00:54
+ * @Date         : 2022-07-08 10:17:53
+ * @LastEditTime : 2022-12-15 23:00:54
  * @Description  : edit description
-```
+-->
 
 ## 介绍
 

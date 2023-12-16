@@ -1,25 +1,21 @@
 ---
 author: facsert
-pubDatetime: 2023-05-23 15:28:43
-title: Node config
+pubDatetime: 2023-03-23 15:28:43
+title: NodeJS config
 postSlug: Node base config
 featured: true
 draft: false
 tags:
-  - node
-description:
-  Some rules & recommendations for creating or adding new posts using AstroPaper
-  theme.
+  - NodeJS
+description: "NodeJS 基本配置"
 ---
 
 <!--
  * @Author       : facsert
  * @Date         : 2023-05-23 15:28:43
- * @LastEditTime: 2023-12-15 23:02:39
+ * @LastEditTime : 2023-12-15 23:02:39
  * @Description  : edit description
 -->
-
-# Node config
 
 ## Download and Update
 
