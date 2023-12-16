@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2022-08-30 12:08:37
 title: Python eval
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

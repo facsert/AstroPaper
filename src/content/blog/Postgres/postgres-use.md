@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-12-06 22:05:18
 title: Postgresql configuration
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Postgresql

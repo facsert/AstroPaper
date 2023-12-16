@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-12-13 21:51:08
 title: Python APScheduler
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

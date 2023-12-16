@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-10-25 11:56:31
 title: Python Magic Method
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

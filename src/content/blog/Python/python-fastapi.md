@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-10-28 14:52:02
 title: Python fastapi
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

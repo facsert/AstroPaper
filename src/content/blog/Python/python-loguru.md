@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-11-23 08:58:24
 title: Python loguru
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

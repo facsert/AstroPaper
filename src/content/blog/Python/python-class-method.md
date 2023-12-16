@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2022-07-24 12:08:37
 title: Python Class
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

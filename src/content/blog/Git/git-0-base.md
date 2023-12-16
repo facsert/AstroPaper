@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2022-07-08 10:17:53
 title: Git Base
 postSlug: git basic usage
-featured: true
+featured: false
 draft: false
 tags:
   - git

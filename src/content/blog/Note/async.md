@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-07-10 14:24:30
 title: Async
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - async

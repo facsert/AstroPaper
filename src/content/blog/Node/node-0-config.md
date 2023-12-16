@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-03-23 15:28:43
 title: NodeJS config
 postSlug: Node base config
-featured: true
+featured: false
 draft: false
 tags:
   - NodeJS

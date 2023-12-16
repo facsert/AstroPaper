@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2022-07-25 20:08:15
 title: Python flat dictionary
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python

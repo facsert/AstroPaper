@@ -3,7 +3,7 @@ author: facsert
 pubDatetime: 2023-09-27 21:03:53
 title: Python Anaconda
 postSlug: ""
-featured: true
+featured: false
 draft: false
 tags:
   - Python
