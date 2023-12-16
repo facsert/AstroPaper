@@ -9,6 +9,7 @@ import { SITE } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  base: "/facsert.github.io",
   integrations: [
     tailwind({
       applyBaseStyles: false,

@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2022-08-28 15:28:43
-title: Hexo
+title: zsh
 postSlug: ""
 featured: false
 draft: false
