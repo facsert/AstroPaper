@@ -1,7 +1,7 @@
 ---
 author: facsert
-pubDatetime: 2022-07-03 21:20:45
-title: BASH Basic
+pubDatetime: 2022-07-03 15:44:44
+title: 01.BASH Basic
 postSlug: ""
 featured: false
 draft: false
@@ -19,10 +19,41 @@ description: "Bash 基本语法"
 
 [BASH 教程](https://wangdoc.com/bash/)
 
+[介绍](#介绍)
+[语法](#语法)
+[输出](#输出)
+[变量](#变量)
+[引号](#引号)
+[变量](#变量)
+[环境变量](#环境变量)
+
+## 介绍
+
+Bash 是一种 Linux 和 macOS 上的命令行 Shell，它是 Linux 系统中使用最广泛的 Shell  
+Shell 是一个提供与用户对话的环境的程序; 又称为命令行环境 command line interface, 简写为 CLI
+
+```bash
+ $ cat /etc/shells                               # 查看系统下所有的 shell
+ > /bin/bash
+ > /bin/csh
+ > /bin/dash
+ > /bin/ksh
+ > /bin/sh
+ > /bin/tcsh
+ > /bin/zsh
+
+ $ echo $SHELL                                   # 当前使用的 shell
+ > /bin/zsh
+
+ $ chsh -s /bin/bash                             # 修改当前 shell 为 bash
+```
+
+## 语法
+
 BASH 基础语法
 
 ```bash
- $ command <option> <args>                       # shell 命令一般格式
+ $ command <option> <args>                       # 命令 选项 参数, shell 命令一般格式
 
  $ cat -n log.txt                                # 读取 log.txt 文件, 命令 cat, 选项 -n, 参数 log.txt
  > 1 1st
@@ -34,7 +65,9 @@ BASH 基础语法
  > 3rd
 ```
 
-## 打印输出
+Bash 使用 `#` 作为注释符号, 注释内容不会被执行
+
+## 输出
 
 ### [echo](https://linux.alianga.com/c/echo.html)
 
@@ -64,11 +97,42 @@ BASH 基础语法
  > left  _rightf
 ```
 
-## 变量引用
+### 输出重定向
 
-BASH 只有字符串一种数据类型, 想要操作字符串或者引用变量需要使用特殊符号
+Bash 命令正确结果默认输出到标准输出, 错误内容输出到标准错误输出  
+可以通过重定向符号 `>`(覆盖写入) `>>`(追加写入) 将输出内容重定向到指定对象
+
+| 标准输出 | 标准错误 |    空     |
+| :------: | :------: | :-------: |
+|    &1    |    &2    | /dev/null |
 
 ```bash
+ $ command 2>&1                                  # 将标准错误输出重定向到标准输出
+ > zsh: command not found: data
+
+ $ command 2>/dev/null                           # 将错误写入空的虚拟设备, 即不显示错误
+ >
+
+ $ command > file                                # 清空文件内容, 命令标准输出写入文件
+ $ date > log.txt; cat log.txt                   # date 命令结果写入 log文件, 打印 log 内容验证写入内容
+ > Mon Jul  3 23:05:14 CST 2023
+
+ $ command >> file                               # 保留文件内容, 命令标准输出追加入文件
+ $ date >> log.txt; cat log.txt                  # date 命令结果追加入 log文件, 打印 log 内容验证写入内容
+ > Mon Jul  3 23:05:14 CST 2023
+ > Mon Jul  3 23:05:38 CST 2023
+
+ $ command > /dev/null                           # 命令标准输出写入 null, 即不显示正常结果
+ >
+```
+
+## 变量
+
+BASH 变量默认为字符串, 想要操作字符串或者引用变量需要使用特殊符号
+
+```bash
+ $ <variable name>=<variable value>              # 变量定义
+
  $ variable="hello world"                        # 变量赋值, '=' 号前后不允许空格
  $ temp=hello_world                              # 字符串无引号赋值时不允许空格
 
@@ -84,38 +148,6 @@ BASH 只有字符串一种数据类型, 想要操作字符串或者引用变量�
 
 建议字符串操作时, 添加引号使变量操作更加明确(易于区分编辑器中字符串与变量)
 
-## 引号
-
-### 单引号与双引号
-
-BASH 区分单引号和双引号, 单引号内全部为当做字符(转义符有效), 双引号会激活变量引用
-
-```bash
- $ name="petter"
-
- $ echo 'hello\t$name'                           # 单引号禁止变量名扩展, 原样打印
- > hello  $name
-
- $ echo "hello\t$name"                           # 双引号允许变量名扩展
- > hello  petter
-```
-
-### 反引号
-
-反引号用于执行命令, 一般用于将命令结果赋值给变量
-
-```bash
- $ time=`date`                                   # 将 data 命令结果赋值给 time
- $ echo "$time"                                  # 打印变量值
- > Wed Aug 10 21:49:38 HKT 2022
-
- $ time=$(date)                                  # 与反引号效果一致
-```
-
-由于反引号易于与单引号混淆, 建议使用 `$()` 方式, 便于区分
-
-## 变量
-
 ### 环境变量
 
 BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 用于保存环境信息
@@ -123,8 +155,8 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
 ```bash
  $ env                                           # 显示所有环境变量
 
- $ echo $HOME                                    # 打印用户目录
- > /home/facser
+ $ echo "path: $HOME user: $USER"                # 打印用户目录和用户
+ > path: /root user: root
 
  $ echo $PATH                                    # 运行环境目录组成的列表
 
@@ -135,17 +167,21 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
 
 注: 更多环境变量浏览 [环境变量](#常用环境变量)
 
-### 自定义变量
+### 特殊变量
 
 ```bash
- $ <var>=<val>                                   # 变量定义, 等号两边不允许空格
+ $ $<char>                                       # 如 $? $! 等特殊含义变量
 
- $ $<char>                                       # 如 $? #! 等特殊含义变量
- $ echo $?                                       # 上个命令返回值
- > 0                                             # 0 表示命令执行成功, 其它只表示失败或错误
+ $ echo "last command return: $?"                # 上个命令返回值
+ > last command return: 0                        # 0 表示命令执行成功, 其它表示失败或错误
+
+ $ echo "Process ID: $$"                         # 当前进程 ID
+ > Process ID: 12345                             # 12345 为当前 shell 进程 ID
 ```
 
 注: 更多特殊变量 [特殊变量](#特殊变量)
+
+### 变量默认值
 
 ```bash
  $ ${variable:-value}                            # 变量为空或不存在返回 value
@@ -157,6 +193,8 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
  $ echo "hello ${name:-petter}"
  > hello petter
 ```
+
+### 特殊类型变量
 
 ```bash
  $ declare <opt> <var>=<val>                     # 定义特殊类型变量
@@ -177,29 +215,39 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
  > sum: 15 add: 16
 ```
 
-## 输出重定向
+## 引号
+
+### 单引号与双引号
+
+BASH 区分单引号和双引号, 单引号内全部为当做字符, 双引号会激活变量引用
 
 ```bash
- $ command 2>&1                                  # 1 表示标准输出 2 表示标准错误输出
- > zsh: command not found: data
+ $ name="petter"
 
- $ command 2>/dev/null                           # 将错误写入 null, 即不显示错误
- >
+ $ echo 'hello\t$name'                           # 单引号禁止变量名扩展, 原样打印
+ > hello\t$name                                  # bash 默认不转义 \t, zsh 默认转义 \t
 
- $ command > file                                # 清空文件内容, 命令标准输出写入文件
- $ date > log.txt; cat log.txt
- > Mon Jul  3 23:05:14 CST 2023
-
- $ command >> file                               # 保留文件内容, 命令标准输出追加入文件
- $ date >> log.txt; cat log.txt
- > Mon Jul  3 23:05:14 CST 2023
- > Mon Jul  3 23:05:38 CST 2023
-
- $ command > /dev/null                           # 命令标准输出写入 null, 即不显示正常结果
- >
+ $ echo "hello\t$name"                           # 双引号允许变量名扩展
+ > hello\tpetter
 ```
 
-## 常用转义符号
+### 反引号
+
+反引号用于执行命令, 一般用于将命令结果赋值给变量
+
+```bash
+ $ time=`date`                                   # 将 data 命令结果赋值给 time
+ $ echo "$time"                                  # 打印变量值
+ > Wed Aug 10 21:49:38 HKT 2022
+
+ $ time=$(date)                                  # 与反引号效果一致
+```
+
+由于反引号易于与单引号混淆, 建议使用 `$()` 方式, 便于区分
+
+## 附录
+
+### 常用转义符号
 
 | 符号 |      含义      |
 | :--: | :------------: |
@@ -208,7 +256,7 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
 | `\t` |     Tab 键     |
 | `\b` | 光标左移 1 位  |
 
-## 常用环境变量
+### 常用环境变量
 
 |  变量   |       含义       |
 | :-----: | :--------------: |
@@ -218,7 +266,7 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
 | `PATH`  |     环境变量     |
 |  `PWD`  |     当前目录     |
 
-## 特殊变量
+### 常用特殊变量
 
 | 变量 |           含义           |
 | :--: | :----------------------: |

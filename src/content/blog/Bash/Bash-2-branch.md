@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2022-07-03 17:44:44
-title: Bash Branch
+title: 02.Bash Branch
 postSlug: ""
 featured: false
 draft: false
@@ -17,6 +17,10 @@ description: "Bash 条件分支"
  * @Description  : edit description
 -->
 
+[if 分支](#if-分支)
+[表达式](#表达式)
+[case 分支](#case-分支)
+
 ## if 分支
 
 if 分支是 shell 中的最常见的分支
@@ -24,7 +28,7 @@ if 分支是 shell 中的最常见的分支
 ```shell
 if <expression> ; then                           # expression 返回值为 0 表示条件成立
     commands                                     # 表达式成立才会执行 command
-fi
+fi                                               # 分支语句结束
 
 if [[ 3 > 2 ]]; then                             #  3 > 2 条件成立
     echo -e " 3 bigger thean 2\n"                # 执行打印
@@ -39,7 +43,7 @@ fi
 
 ### 多重分支
 
-```shell
+```bash
 if <expression>; then                            # command 返回值为 0 表示条件成立
     commands
 elif <expression>; then                          # if 不成立, 判断 elif
@@ -59,7 +63,7 @@ fi
 > first if                                       # 执行第一个成立的 if 条件
 ```
 
-### 表达式
+## 表达式
 
 表达式有很多形式, 数值或字符串比较需要使用括号包含  
 Linux 命令也可以作为表达式, 命令返回值 0 为 true, 返回值不为 0 为 false
@@ -73,7 +77,7 @@ test < expression >                              # 常用作 if 判断的表达�
 if [[ $USER == "root" ]]; then
     echo "user is root"
 else
-    echo "not user root"
+    echo "not root user"
 fi
 
 [[ $USER == "root" ]] && echo "user is root"     # &&(且) 表达式为 true 才会执行后半段
@@ -183,13 +187,17 @@ fi
 
 ## case 分支
 
+使用 case 作为多重判断条件, 支持正则表达式, 支持多行
+
 ```bash
 case expression in
     pattern1 )
         commands;;
     pattern2 )
         commands;;
-    esac
+    *)
+        commands;;
+esac
 
 index=2
 case $index in
@@ -201,5 +209,5 @@ case $index in
         echo "index is 1";;
     *)
         echo "index not in 1,2,3";;
-    esac
+esac
 ```
