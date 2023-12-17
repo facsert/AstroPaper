@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-10-08 21:50:45
-title: Bash loop
+title: 03.Bash Loop
 postSlug: ""
 featured: false
 draft: false
@@ -18,6 +18,9 @@ description: "Bash 循环语法"
  * @Description:
 -->
 
+[for 循环](#for-循环)
+[循环](#while-循环)
+
 ## for 循环
 
 ```bash
@@ -25,7 +28,7 @@ for variable in list; do
     commands
 done
 
- $ for i in (1 2 3)do echo "index: $i" ; done    # for in 循环
+ $ for i in (1 2 3);do echo "index: $i" ; done   # for in 循环
  > index: 1
  > index: 2
  > index: 3

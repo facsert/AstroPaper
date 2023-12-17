@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-10-08 21:52:12
-title: Bash list
+title: 05.Bash List
 postSlug: ""
 featured: false
 draft: false
@@ -18,11 +18,12 @@ description: "Bash 列表"
  * @Description:
 -->
 
+[数组](#数组)
+[关联数组](#关联数组)
+
 ## 数组
 
-创建数组  
-declare 关键字创建数组  
-等号创建数组
+使用 `declare` 关键字或者 `=` 创建数组
 
 ```bash
  $ declare -a array=("array" "array" "array")    # 使用 declare 关键字创建数组
@@ -32,17 +33,17 @@ declare 关键字创建数组
  > list:list list  array:array array array
 
  $ lst=()                                        # 创建空数组
- $ lst[1]="1"; lst[3]="2"; lst[4]="4"            # 向数组中添加数据, 从 0 开发, 可以跳过
+ $ lst[1]="1st"; lst[2]="2nd"; lst[4]="4th"      # 向数组中添加数据, 从 0 开发, 可以跳过
  $ echo ${lst[@]}
- > 1 2 4                                         # 只打印赋值数据
+ > 1st 2nd 4th                                   # 只打印赋值数据
 ```
 
 数组属性: 数组长度, 数组下标, 子数组
 
 ```bash
- $ array=([1]=1 [2]=2 [4]=4)                     # 创建数组, 并赋值
+ $ array=([1]=1st [2]=2nd [4]=4th)               # 创建数组, 并赋值
  $ echo ${array[@]}
- > 1 2 4
+ > 1st 2nd 4th
 
  $ echo ${#array[@]}                             # 数组的长度
  > 3
@@ -50,13 +51,17 @@ declare 关键字创建数组
  $ echo ${!array[@]}                             # 打印数组下标
  > 1 2 4
 
- $ echo ${array[@]:0:3}                          # 获取数组子数组, 从序号 0 开始, 取 2 个
- > 1 2 4                                         # 数组 n 1 2 n 4, 0 ,3未赋值, 从 0 开始取 3 个有效元素
+ $ echo ${array[@]:0:3}                          # 获取数组子数组, 从序号 0 开始, 取 3 个
+ > 1st 2nd                                       # 数组值 n 1st 2nd n 4th; 0 ,3未赋值, 从 0 后开始取 3 个有效元素
 
  $ list=(5 6)
  $ array+=${list[@]}                             # 数组追加
  $ echo ${array[@]}
- > 5 6 1 2 4
+ > 5 6 1st 2nd 4th
+
+ $ unset array[2]                                # 删除数组元素
+ $ echo ${array[@]}
+ > 1st 4th
 ```
 
 ## 关联数组
