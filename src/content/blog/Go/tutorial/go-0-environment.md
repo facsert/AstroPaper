@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-07-12 09:29:19
-title: Go Environment
+title: 00.Go Environment
 postSlug: ""
 featured: false
 draft: false
@@ -17,8 +17,9 @@ description: "Go 环境配置"
  * @Description  : edit description
 -->
 
-- [安装](#安装)
-- [开始](#开始)
+[安装](#安装)
+[版本管理](#版本管理)
+[开始](#开始)
 
 ## 安装
 
@@ -44,7 +45,7 @@ description: "Go 环境配置"
  $ go env -w GOPROXY=https://goproxy.cn,direct   # 更换 go 默认下载源
 ```
 
-## 升级
+## 版本管理
 
 使用 gvm 管理 go 版本
 

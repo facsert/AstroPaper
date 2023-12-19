@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-06-12 10:03:49
-title: 06.Bash String
+title: 05.Bash String
 postSlug: ""
 featured: false
 draft: false

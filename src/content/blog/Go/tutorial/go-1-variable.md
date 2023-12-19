@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2022-07-19 19:21:13
-title: Go variable
+title: 01.Go Variable
 postSlug: ""
 featured: false
 draft: false
@@ -17,10 +17,10 @@ description: "Go 变量"
  * @Description  : edit description
 -->
 
-- [变量](#变量)
-- [常量](#常量)
-- [打印](#打印)
-- [附录](#附录)
+[变量](#变量)
+[常量](#常量)
+[打印](#打印)
+[附录](#附录)
 
 ## 变量
 
@@ -61,7 +61,7 @@ str, num := "hello", 3                           // 多个变量声明并赋值
 ### 匿名变量
 
 Go 中存在**未被使用**的变量会报错  
-使用匿名变量 "\_" 处理无需使用的变量
+使用匿名变量 `_` 处理无需使用的变量
 
 ```go
 var name string = "facsert"

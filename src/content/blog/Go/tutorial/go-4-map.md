@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-03-23 15:28:43
-title: Go Map
+title: 04.Go Map
 postSlug: ""
 featured: false
 draft: false
