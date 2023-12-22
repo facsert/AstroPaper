@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-10-08 21:52:12
-title: 05.Bash List
+title: 06.Bash List
 postSlug: ""
 featured: false
 draft: false
