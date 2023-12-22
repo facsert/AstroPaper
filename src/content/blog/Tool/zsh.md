@@ -18,18 +18,88 @@ description: "zsh 是一个高效美观的 shell"
  * @Description  : edit description
 -->
 
-最近使用 mac 的时候发现, mac 默认的 shell 是 zsh, 顺手查了一下 bash 和 zsh 区别
-然后就发现了新天地
+[zsh 介绍](#zsh-介绍)
+[安装与配置](#安装与配置)
+[主题](#主题)
+[功能](#功能)
+[插件](#插件)
 
 ## zsh 介绍
 
-zsh能基本完美兼容bash的命令，并且使用起来更加优雅
+zsh能基本完美兼容bash的命令，并且使用起来更加优雅,
+zsh 可以通过 oh-my-zsh 添加主题和插件实现美观高效的命令行体验
 
-- 命令提示
-- 智能补全
-- 快速跳转
-- 热键绑定
-- 框架主题
+## 安装与配置
+
+```zsh
+ $ sudo apt install zsh                          # Ubuntu 直接下载安装
+ $ yum install zsh                               # Centos Redhat yum 安装版本低无法添加 oh-my-zsh
+ 
+ $ zsh && echo $SHELL                            # mac 默认是 zsh
+ > /bin/zsh
+```
+
+```zsh
+ $ zsh                                           # 使用 zsh 命令启动 zsh
+
+ $ echo $SHELL                                   # 查看当前 shell
+ > /bin/bash
+
+ $ which zsh                                     # 查看 zsh 执行文件位置
+ $ chsh -s /bin/zsh                              # /bin/zsh 需要和 zsh 执行文件位置一致
+
+ $ ~/.zshrc                                      # 启动 zsh 时执行的配置文件
+ $ source ~/.zshrc                               # 配置立即生效
+```
+
+注: .zshrc 可删除, 启动 zsh 未发现 .zshrc 文件会提示重新配置 zsh
+
+## 主题
+
+oh-my-zsh 是 zsh 主题控制工具, 安装后可更换主题, 安装插件  
+
+```zsh
+ # GitHub 源码安装
+ $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+ # 国内镜像
+ $ sh -c "$(curl -fsSL https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"
+```
+
+注: .oh-my-zsh 默认安装在 ~/.oh-my-zsh, 主题夹为 ~/.oh-my-zsh/themes
+
+### 配置主题
+
+```zsh
+ $ vi ~/.zshrc                                   # 修改 zsh 配置文件
+
+ > ZSH_THEME="<主题>"                              # 更换 .oh-my-zsh 主题
+ > export ZSH="<.oh-my-zsh位置>"                   # 定义 .oh-my-zsh 位置
+```
+
+注: .oh-my-zsh 的位置是可变的, 只要在 .zshrc 配置中指定即可
+
+### powerlevel10k
+
+.oh-my-zsh 有很多主题可更换, powerlevel10k 是一款爆火的主题
+
+```zsh
+ $ git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+ $ vi ~/.zshrc                                   # 修改 zsh 主题
+ > ZSH_THEME="powerlevel10k/powerlevel10k"
+
+$ source ~/.zshrc                                # 配置立即生效
+
+$ p10k configure                                 # 重新设置主题配置
+```
+
+powerlevel10k 推荐使用 mesloLGS 字体(`https://github.com/romkatv/powerlevel10k-media` 下载安装)
+注: 配置生效后, 自动进入配置选项, 逐一选择即可
+
+## 功能
+
+介绍一些高效功能
 
 ### 命令提示
 
@@ -76,72 +146,9 @@ zsh能基本完美兼容bash的命令，并且使用起来更加优雅
  git pull origin {curr_branch} => ggpull
 ```
 
-### 框架主题
+## 插件
 
-安装 oh-my-zsh 更换主题, 添加插件
-
-## zsh 安装与配置
-
-### 下载安装
-
-```zsh
- $ sudo apt install zsh                          # Ubuntu 直接下载安装
-
- $ yum install zsh                               # Centos Redhat yum 安装版本低无法添加 oh-my-zsh
-```
-
-### 启动与环境
-
-```zsh
- $ zsh                                           # 使用 zsh 命令启动 zsh
-
- $ echo $SHELL                                   # 查看当前 shell
- $ which zsh                                     # 查看 zsh 执行文件位置
- $ chsh -s /bin/zsh                              # /bin/zsh 需要和 zsh 执行文件位置一致
-
- $ ~/.zshrc                                      # 启动 zsh 时执行的配置文件
- $ source ~/.zshrc                               # 配置立即生效
-```
-
-注: .zshrc 可删除, 启动 zsh 未发现 .zshrc 文件会提示重新配置 zsh
-
-### 配置 .oh-my-zsh
-
-```zsh
- $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
- $ sh -c "$(curl -fsSL https://gitee.com/pocmon/ohmyzsh/raw/master/tools/install.sh)"
-```
-
-注: .oh-my-zsh 默认安装在 ~/.oh-my-zsh, 主题夹为 ~/.oh-my-zsh/themes
-
-### zsh 配置主题
-
-```zsh
- $ vi ~/.zshrc                                   # 修改 zsh 配置文件
-
- > ZSH_THEME="<主题>"                              # 更换 .oh-my-zsh 主题
- > export ZSH="<.oh-my-zsh位置>"                   # 定义 .oh-my-zsh 位置
-```
-
-注: .oh-my-zsh 的位置是可变的, 只要在 .zshrc 配置中指定即可
-
-### powerlevel10k
-
-.oh-my-zsh 有很多主题可更换, powerlevel10k 是另外一款爆火的主题
-
-```zsh
- $ git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
- $ vi ~/.zshrc                                   # 修改 zsh 主题
- > ZSH_THEME="powerlevel10k/powerlevel10k"
-
-$ source ~/.zshrc                                # 配置立即生效
-
-$ p10k configure                                 # 重新设置主题配置
-```
-
-注: 配置生效后, 自动进入配置选项, 逐一选择即可
+oh-my-zsh 可以安装许多高效插件, 安装后可使用插件功能
 
 ### zsh-syntax-highlighting
 
@@ -192,7 +199,6 @@ $ p10k configure                                 # 重新设置主题配置
  $ ...                                           # 随意进入其他路径
  $
  $ z c                                           # z 命令加文件夹名即可回去
-
 ```
 
 ### extract
@@ -208,5 +214,4 @@ $ p10k configure                                 # 重新设置主题配置
 
  $ x package.tar.gz                              # x 命令加压缩包即可解压
  $ x package.zip
-
 ```

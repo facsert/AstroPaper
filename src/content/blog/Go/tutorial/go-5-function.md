@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-03-28 15:28:43
-title: Go Function
+title: 05.Go Function
 postSlug: ""
 featured: false
 draft: false

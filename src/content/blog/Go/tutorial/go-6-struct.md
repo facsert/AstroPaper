@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-03-27 15:28:43
-title: Go Struct
+title: 06.Go Struct
 postSlug: ""
 featured: false
 draft: false

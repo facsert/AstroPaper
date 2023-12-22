@@ -17,6 +17,10 @@ description: "Go 条件分支"
  * @Description  : edit description
 -->
 
+[if 分支](#if-else-分支)
+[for 循环](#for-循环)
+[switch](#switch-case)
+
 ## if else 分支
 
 ```go

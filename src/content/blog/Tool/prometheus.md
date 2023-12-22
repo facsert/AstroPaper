@@ -19,17 +19,32 @@ description: "自动化运维监控工具 Prometheus"
  * @Description:
 -->
 
-## 性能监控
+- [工具介绍](#工具介绍)  
+- [prometheus](#prometheus)  
+- [node_exporter](#node_exporter)  
+- [grafana](#grafana)  
+- [process_exporter](#process_exporter)  
+- [loki](#loki)  
+- [promtail](#promtail)  
+- [alertmanager](#alertmanager)  
 
-node_exporter 数据收集
-prometheus 数据处理和监控
-grafana 数据可视化
+## 工具介绍
 
-### Prometheus
+- Prometheus      : 系统监控和报警系统
+- node_exporter   : 节点信息采集工具
+- process-exporter: 进程信息采集工具
+- loki            : log 聚合系统, 类似于 prometheus
+- promtail        : 节点 log 采集工具
+- alertmanager    : 报警系统
+- grafana         : 数据可视化面板
 
+## Prometheus
+
+数据监控, 采集, 告警系统; 主动采集被测节点信息  
 [Prometheus Download](https://prometheus.io/download/)
 
 ```bash
+ # 解压安装包, 创建数据目录, 创建配置文件
  $ tar -zxvf prometheus-2.45.1.linux-amd64.tar.gz
  $ cd prometheus-2.45.1.linux-amd64 && mkdir -p data
  $ vi prometheus.yml
@@ -38,35 +53,32 @@ grafana 数据可视化
 官方默认配置文件
 
 ```yaml
-# my global config
-global:
-  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+global:                                          # 全局配置
+  scrape_interval: 15s                           # 每 15s 收集一次 xx-exporter 的数据
+  evaluation_interval: 15s                       # 每隔 15s 计算一次所有规则, 用于告警判断(默认 1m)
+  # scrape_timeout: 10s                          # 获取数据的超时时间, 默认 10s
 
-# Alertmanager configuration
-alerting:
+alerting:                                        # Alertmanager 配置
   alertmanagers:
     - static_configs:
         - targets:
-          # - alertmanager:9093
+          # - alertmanager:9093                  # 配置 alertmanager 服务
 
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
+rule_files:                                      # 外部告警规则文件
   # - "first_rules.yml"
   # - "second_rules.yml"
 
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+
   - job_name: "prometheus"
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
     static_configs:
       - targets: ["localhost:9090"]
+  
+  # 添加外部采集服务, 如 node_exporter process-exporter
+  # - job_name: "node_exporter"
+  #   static_configs:
+  #     - targets: ["localhost:9100"]
+
 ```
 
 默认端口: 9090
@@ -85,13 +97,12 @@ scrape_configs:
  > ts=2023-12-07T09:13:17.910Z caller=main.go:1004 level=info msg="Server is ready to receive web requests."
 ```
 
-config.file: 指定配置文件
-web.enable-lifecycle: 热重载, 修改配置文件后, 使用 http 请求重载(`curl -X POST http://localhost:9090/-/reload`)
+注意: 添加 `--web.enable-lifecycle` 启用热重载, 执行 `curl -X POST http://localhost:9090/-/reload` 重载  
+浏览器打开 `http://localhost:9000` 打开 prometheus 控制台
 
-浏览器打开 `http://localhost:9000`
+## node_exporter
 
-### node_exporter
-
+在监控节点运行 node_exporter 采集节点信息, 待 peometheus 收集  
 [node_exporter Download](https://prometheus.io/download/)
 
 ```bash
@@ -104,9 +115,9 @@ web.enable-lifecycle: 热重载, 修改配置文件后, 使用 http 请求重载
  > ts=1970-02-06T18:49:59.679Z caller=tls_config.go:277 level=info msg="TLS is disabled." http2=false address=0.0.0.0:9100
 ```
 
-浏览器打开 `http://localhost:9100`
-
-Prometheus 配置文件添加 node_export 监控, 重启 Prometheus
+浏览器打开 `http://localhost:9100` 进入 node_exporter 控制台  
+Prometheus 配置文件添加 node_export 监控, 重载 Prometheus  
+Prometheus 根据节点信息获取 node_exporter 采集的监控数据
 
 ```yaml
 scrape_configs:
@@ -115,14 +126,14 @@ scrape_configs:
 
   - job_name: "node_export"
     static_configs:
-      - targets: ["localhost:9100"]
+      - targets: ["<节点 HOST>:9100"]
 ```
 
-### grafana
+## grafana
 
+Grafana 用于展示 Prometheus 采集的监控数据, 通过 promQL 语句绘制图表或使用第三方模板进行数据可视化  
 [Grafana Download](https://grafana.com/grafana/download?pg=graf&plcmt=deploy-box-1)
-
-选择平台和链接下载包
+[Grafana Template](https://grafana.com/grafana/dashboards/)
 
 ```bash
  $ tar -zxvf grafana-enterprise-9.5.9.linux-arm64.tar.gz
@@ -136,14 +147,13 @@ scrape_configs:
 初始用户 admin  
 初始密码 admin
 
-## 进程监控
+## process_exporter
 
-### process_exporter
-
+process_exporter 用于监控进程和线程等更细致的信息  
 [process-exporter](https://github.com/ncabatoff/process-exporter)
-下载对应版本包, 将包放入被测机器
 
 ```bash
+ # 解压包, 创建配置文件
  $ tar -zxvf process-exporter-0.7.9.linux-arm64.tar.gz
  $ cd process-exporter-0.7.9.linux-arm64
  $ vi config.yaml
@@ -170,17 +180,17 @@ process_names:
  $ nohup ./process-exporter -config.path config.yaml &
 ```
 
-打开浏览器 `http://localhost:9256/metrics`
+打开浏览器 `http://localhost:9256/metrics`  
 若系统种存在监控的进程, log 必定出现 `cpu_seconds_total` 字段
 
-```log
+```bash
 namedprocess_namegroup_cpu_seconds_total{groupname="map[:sshd]",mode="system"} 0.19000000000000128
 namedprocess_namegroup_cpu_seconds_total{groupname="map[:sshd]",mode="user"} 0.009999999999999787
 namedprocess_namegroup_cpu_seconds_total{groupname="map[:python]",mode="system"} 0.010000000000019327
 namedprocess_namegroup_cpu_seconds_total{groupname="map[:python]",mode="user"} 0.009999999999990905
 ```
 
-Prometheus 配置文件添加 node_export 监控, 重启 Prometheus
+Prometheus 配置文件添加 node_export 监控, 重启 Prometheus  
 
 ```yaml
 scrape_configs:
@@ -189,15 +199,14 @@ scrape_configs:
 
   - job_name: "process_exporter"
     static_configs:
-      - targets: ["localhost:9256"]
+      - targets: ["<节点 HOST>:9256"]
 ```
 
 Prometheus `http://localhost:9090/service-discovery?search=` 查询所有监控的服务
 
-## log 监控
+## loki
 
-### loki
-
+Loki 是一个模仿 Prometheus 的日志聚合系统, 也可以使用 Grafana 作为展示界面
 [Github Loki](https://github.com/grafana/loki/releases/)
 
 官方配置
@@ -232,7 +241,7 @@ schema_config:
         period: 24h
 
 ruler:
-  alertmanager_url: http://localhost:9093
+  alertmanager_url: http://localhost:9093        # 添加告警服务路由
 # By default, Loki will send anonymous, but uniquely-identifiable usage and configuration
 # analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/
 #
@@ -253,7 +262,7 @@ ruler:
  $ ./loki-linux-amd64 -config.file=$PWD/loki-config.yaml
 ```
 
-### promtail
+## promtail
 
 [Github Promtail](https://github.com/grafana/loki/releases/)
 
@@ -294,8 +303,6 @@ scrape_configs:
 
 http://localhost:9080 promtail 界面查看
 
-curl -X POST http://localhost:9090/-/reload prometheus
-
 ## Alertmanager
 
 alertmanager 是一个告警组件, 默认端口 9093
@@ -305,22 +312,22 @@ alertmanager 是一个告警组件, 默认端口 9093
 ```yaml
 global:
   resolve_timeout: 5m
-  smtp_smarthost: "smtp.com:25" # 配置 smtp 服务地址, 邮箱类型和 smtp 服务器对应
-  smtp_from: "facsert@outlook.com" #
-  smtp_auth_username: "facsert@outlook.com" # 邮箱账户
-  smtp_auth_password: "xxxxxx" # 邮箱密码
+  smtp_smarthost: "smtp.com:25"                  # 配置 smtp 服务地址, 邮箱类型和 smtp 服务器对应
+  smtp_from: "facsert@outlook.com"               # 发送人
+  smtp_auth_username: "facsert@outlook.com"      # 邮箱账户
+  smtp_auth_password: "xxxxxx"                   # 邮箱密码
   smtp_require_tls: false
 
 templates:
-  - "/root/Desktop/alertmanager/email.tmpl" # 邮件模板
+  - "/root/Desktop/alertmanager/email.tmpl"      # 邮件模板
 
 route:
-  receiver: group # 默认收件人
-  group_wait: 3ms # 在组内等待所配置的时间，如果同组内，30秒内出现相同报警，在一个组内出现。
-  group_interval: 5m # 如果组内内容不变化，合并为一条警报信息，5m后发送。
-  repeat_interval: 24h # 发送报警间隔，如果指定时间内没有修复，则重新发送报警。
-  group_by: [...] # 报警分组 ['alertname', 'instance'] 不分组 [...]
-
+  receiver: group                                # 默认收件人
+  group_by: [...]                                # 分组方式 ['alertname', 'instance'] 不分组 [...], 字段值相同即为通一组, 告警可合并
+  group_wait: 30s                                # 等待同组告警时间; 触发告警后, 等待同组告警以合并告警信息发送一次(默认 30s)
+  group_interval: 5m                             # 已发送告警后, 同组又出现告警, 再次发送告警的等待时间(默认 5m)
+  repeat_interval: 4h                            # 已发送告警, 告警未恢复, 再次发送同样的告警信息的间隔(默认 4h)
+  
   # routes:                                      # 设置子路由, 按照路由规则发送, 匹配规则才会发送给接收人
   #   - match:
   #       team: operations
@@ -331,10 +338,10 @@ route:
   #     match:
   #       team: operations
 
-receivers: # 定义接受人群组
+receivers:                                       # 定义接受人群组
   - name: group #
     email_configs:
-      - to: "dingwenlong4@huawei.com" # 如果想发送多个人就以 ','做分割，写多个邮件人即可。
+      - to: "dingwenlong4@huawei.com"            # 如果想发送多个人就以 ','做分割，写多个邮件人即可。
         send_resolved: true
         html: '{{ template "email.default.message" .}}'
         headers:
@@ -350,16 +357,62 @@ inhibit_rules:
     equal: ["alertname", "dev", "instance"]
 ```
 
+
+group_by: 分组方式, 按 prometheus 告警规则配置文件内的 labels 下的字段值相同为一组  
+group_wait: 触发组内第一个告警后, 先不发告警, 等待 group_wait 时间, 看是否有同组告警, 有则合并告警, 仅发送一次  
+group_interval: 组内已发送告警后, 同组出现新告警; 先不发, 等待 group_interval 时间, 看是否有同组新告警, 连同已发送信息, 并合并再次发送  
+repeat_interval: 已发送告警, 告警一直未复位; 等待 repeat_interval 时间, 再次发送同样的告警
+
+
+使用 prometheus 监控 node1 node2 node3 机器
+
+```yaml
+groups:
+- name: Disconnect 
+  rules:
+
+  - alert: node1 Disconnect
+    expr: sum(up{job="node1"}) == 0              # 告警规则, 表达式成立表示 node1 断连
+    for: 1m                                      # 表达式持续成立并持续 1 分钟 pending 时间, 未恢复则开始发送告警
+    labels:                                      # 自定义字段, 用于分组
+      team: node                                 
+      job: disconnect
+      severity: critical   
+      instance: "192.168.1.10" 
+    annotations:
+      summary: "node1 disconnect"                #警报描述
+      description: "监控节点断连"
+      value: "{{ $value }}"
+
+  - alert: node2 Disconnect
+    expr: sum(up{job="node2"}) == 0  
+    for: 1m  
+    labels:                                      # 自定义字段, 用于分组
+      team: node
+      job: disconnect
+      severity: critical   
+      instance: "192.168.1.11" 
+    annotations:
+      summary: "node2 disconnect"                #警报描述
+      description: "监控节点断连"
+      value: "{{ $value }}"
+
+      ......
+```
+
+group_by: ['team`] 使用 `team` 字段分组, 3 条规则 team 字段一致为同一组  
+node1 节点表达式成立(expr), 进入 pending 状态; pending 持续 1 分钟(for 字段), 告警发送给 alertmanager, 并进入 firing 状态  
+aleertmanager 接到 node1 告警, 等待 30s(group_wait); 期间 node2 触发也告警; 同一组两个告警合并然后发送  
+告警发送后 node1 node2 告警未解除, node3 触发告警, 在 node3 触发告警 5m(group_interval) 后发送 node1 node2 node3 合并告警  
+node1 node2 node3 告警一直未恢复, 等待 4h(repeat_interval) 后再次发送 node1 node2 node3 合并告警  
+
+
 邮件模板
 
 ```tmpl
 {{ define "email.default.message" }}
-{{- if gt (len .Alerts.Firing) 0 -}}{{ range $i, $alert :=.Alerts }}
-{{- if eq $alert.Labels.severity "紧急" }}
-========紧急告警==========<br>
-{{- else }}
-
-{{- end }}
+{{- if gt (len .Alerts.Firing) 0 -}}
+<h2> 异常告警 </h2>
 <table border="1" bgcolor="#e8e8e8">
   <thead bgcolor="#EF665B">
       <tr bgcolor="#EF665B">
@@ -374,8 +427,9 @@ inhibit_rules:
       </tr>
   </thead>
   <tbody>
+    {{ range $i, $alert :=.Alerts }}
     <tr>
-      <td align="left" valign="middle">{{ .Labels.instance }}</td>
+      <td align="left" valign="middle">{{ $alert.Labels.instance }}</td>
       <td align="left" valign="middle">{{ $alert.Labels.severity }}</td>
       <td align="left" valign="middle">{{   .Status }}</td>
       <td align="left" valign="middle">{{ $alert.Labels.alertname }}</td>
@@ -384,13 +438,13 @@ inhibit_rules:
       <td align="left" valign="middle">{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}</td>
       <td align="left" valign="middle">{{ $alert.Annotations.description }}</td>
     </tr>
+    {{ end }}
   </tbody>
 </table>
-
-{{ end }}
 {{ end -}}
-{{- if gt (len .Alerts.Resolved) 0 -}}{{ range $i, $alert :=.Alerts }}
 
+{{- if gt (len .Alerts.Resolved) 0 -}}
+<h2> 异常恢复 </h2>
 <table border="1" bgcolor="#e8e8e8">
   <thead bgcolor="#98FB98">
       <tr bgcolor="#98FB98">
@@ -403,21 +457,24 @@ inhibit_rules:
       </tr>
   </thead>
   <tbody>
+    {{ range $i, $alert :=.Alerts }}
     <tr>
-      <td align="left" valign="middle">{{ .Labels.instance }}</td>
+      <td align="left" valign="middle">{{ $alert.Labels.instance }}</td>
       <td align="left" valign="middle">{{   .Status }}</td>
       <td align="left" valign="middle">{{ $alert.Labels.alertname }}</td>
       <td align="left" valign="middle">{{ $alert.Annotations.summary }}</td>
       <td align="left" valign="middle">{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}</td>
       <td align="left" valign="middle">{{ ($alert.EndsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}</td>
     </tr>
+    {{ end }}
   </tbody>
 </table>
-
-{{ end }}
 {{ end -}}
-{{ end }}
+{{ end -}} 
 ```
+
+{{ range $i, $alert :=.Alerts }}: 遍历所有告警, 使用 $alert 获取单个告警对象, 使用 . 获取规则配置中 alert 字段下内容
+如: $alert.Labels.instance => alert.labels.instance  
 
 ```bash
  # 检查配置文件
@@ -434,6 +491,5 @@ inhibit_rules:
  $ ./alertmanager-linux-amd64 --config.file=alertmanager-config.yaml
 ```
 
-http://localhost:9093 promtail 界面查看
-
-重启 alermanager 服务 curl -X POST http://localhost:9093/-/reload alertmanager
+http://localhost:9093 promtail 界面查看  
+重启 alermanager 服务 curl -X POST http://localhost:9093/-/reload alertmanager  

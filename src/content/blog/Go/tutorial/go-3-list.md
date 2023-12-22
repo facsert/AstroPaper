@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-03-13 15:28:43
-title: Go List And Slice
+title: 03.Go List And Slice
 postSlug: ""
 featured: false
 draft: false
