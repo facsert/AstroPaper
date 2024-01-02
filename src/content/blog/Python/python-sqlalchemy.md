@@ -32,6 +32,8 @@ sqlalchemy 是 python 的ORM(Object-relational mapping 对象关系映射)框架
 
 ## 连接
 
+`sqlalchemy` 会根据数据库驱动自动创建数据库文件并连接数据库
+
 ```py
 from sqlalchemy import create_engine
 
@@ -53,19 +55,16 @@ engine = create_engine(
 
 ## 创建表
 
-```python
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+`sqlalchemy` 内置 `declarative_base` 用于创建表的基类,  
+所有继承该类的类都会在注册到内存后自动创建表
 
-engine = create_engine(
-    "sqlite:////root/Desktop/sqilte.db",
-    echo=True, future=True,
-    connect_args={"check_same_thread": False}
-)
+创建 `models.py` 文件, 继承 `Base` 类, 定义表模型
+
+```python
+from sqlalchemy.ext.declarative import declarative_base
+
 
 Base = declarative_base()                        # 声明表的基类, 所有表继承 Base
-Base.metadata.create_all(engine, checkfirst=True)# 创建表
 
 class User(Base):
     __tablename__ = 'users'                      # 表名
@@ -78,7 +77,123 @@ class User(Base):
         return f"<User(id={self.id}, name={self.name}, age={self.age})>"
 ```
 
-基本数据类型
+注: 更多表数据类型 [数据类型](#表数据类型)
+
+创建 `sql.py` 文件, 进行数据库连接并创建表
+
+```python
+from sqlalchemy import create_engine
+
+from models import Base                          # 引入表模型, 将表模型注册进内存
+
+engine = create_engine(
+    "sqlite:////root/Desktop/sqilte.db",
+    echo=True, future=True,
+    connect_args={"check_same_thread": False}
+)
+Base.metadata.create_all(engine, checkfirst=True)# 所有表注册进内存后, 创建表
+```
+
+在 `user.py` 使用数据库
+
+```py
+from sqlalchemy.orm import Session
+
+from sql import engine
+from models import User
+
+db = Session(engine)                             # 创建数据库会话
+db.query(User).all()                             # 数据库操作
+db.close()                                       # 关闭数据库会话
+```
+
+## 插入数据
+
+sqlalchemy 1.x 使用 db.add 添加数据  
+sqlalchemy 2.x 使用 insert 生成 sql 语句, 然后使用 db.execute 执行
+
+```python
+from sqlalchemy import insert
+from sqlalchemy.orm import declarative_base, sessionmaker, Session
+
+db = Session(engine)                                            # 创建 Session 对象
+
+db.add(User(name="Jason", age=20))                                   # sqlalchemy 1.x 插入单个数据
+db.add_all([                                                         # sqlalchemy 1.x 插入多个数据
+    User(name="Jason", age=20),
+    User(name="Lily", age=18),
+])
+db.execute(insert(User), [                                           # sqlalchemy 2.x 插入数据
+    {'name':"Jason", 'age':20},
+    {'name':"Lily", 'age':18},
+])
+
+db.commit()                                                          # 增删改查之后都需要提交数据, 令修改生效
+db.close()
+```
+
+```py
+stmt = insert(User).values(name=Jason, age=20)                       # Insert.values 添加单个数据
+stmt = insert(User).values([{'name':"Jason", 'age':20}])             # Insert.values 批量添加数据
+
+stmt = insert(User).values(name=Jason, age=20).returning(User)       # Insert.returning, execute 时返回插入数据
+db.execute(stmt)                                                     # 执行 sql 语句
+```
+
+## 查询数据
+
+sqlalchemy 1.x 使用 db.query 查询数据
+
+```python
+from sqlalchemy import select
+
+db.query(User).filter(User.age == 18).first()                        # sqlalchemy 1.x 获取单个数据
+db.query(User).filter(User.age == 18).all()                          # sqlalchemy 1.x 批量获取数据
+
+stmt = select(User).where(User.age == 18)
+db.execute(stmt).scalar()                                            # sqlalchemy 2.x 获取单个数据
+db.execute(stmt).scalars()                                           # sqlalchemy 2.x 批量获取数据
+
+db.commit()
+
+stmt = select(User).where(User.age == 18).order_by(User.id)          # 查询数据并按 id 排序
+db.execute(stmt)
+db.commit()
+```
+
+## 更新数据
+
+```python
+from sqlalchemy import update
+
+user = db.query(User).filter(User.age == 18).first()                 # 通过 query 筛选出单个数据
+user.age = 19                                                        # sqlalchemy 1.x 更新单个数据
+db.query(User).filter(User.age == 18).update({"age": 19})            # sqlalchemy 1.x 批量更新
+
+db.execute(update(User).where(User.age == 18), {"age": 19})          # sqlalchemy 2.x 批量更新
+db.execute(update(User).where(User.age == 18).values(age=19))
+
+db.commit()
+db.close()
+```
+
+## 删除数据
+
+```python
+from sqlalchemy import delete
+
+db.delete(db.query(User).filter(User.age == 18).first())             # sqlalchemy 1.x 删除单个数据
+db.query(User).filter(User.age == 18).delete()                       # sqlalchemy 1.x 批量删除数据
+
+db.execute(delete(User).where(User.age == 18))                       # sqlalchemy 2.x 批量删除数据
+
+db.commit()
+db.close()
+```
+
+## 拓展
+
+### 表数据类型
 
 ```py
 Integer     : int 整数类型
@@ -104,175 +219,53 @@ ARRAY       : 数组类型 Column("data", ARRAY(Integer)) => {"data": [1,2,3]}
 JSON        : 字典类型 Column('data', JSON) => {"data": {"a": 1, "b": 2}}
 ```
 
-## 插入数据
+### 表模块封装
 
-sqlalchemy 1.x 使用 session.add 添加数据  
-sqlalchemy 2.x 使用 insert 生成 sql 语句, 然后使用 session.execute 执行
-
-```python
-from sqlalchemy import insert
-from sqlalchemy.orm import declarative_base, sessionmaker, Session
-
-session = Session(engine)                                            # 创建 Session 对象
-
-session.add(User(name="Jason", age=20))                              # sqlalchemy 1.x 插入单个数据
-session.add_all([                                                    # sqlalchemy 1.x 插入多个数据
-    User(name="Jason", age=20),
-    User(name="Lily", age=18),
-])
-session.execute(insert(User), [                                      # sqlalchemy 2.x 插入数据
-    {'name':"Jason", 'age':20},
-    {'name':"Lily", 'age':18},
-])
-
-session.commit()                                                     # 增删改查之后都需要提交数据, 令修改生效
-```
+创建一个基类表, 并赋予一些基本功能  
+便于表数据与基本数据的转换与变更
 
 ```py
-stmt = insert(User).values(name=Jason, age=20)                       # Insert.values 添加单个数据
-stmt = insert(User).values([{'name':"Jason", 'age':20}])             # Insert.values 批量添加数据
+class Table(Base):
+    __abstract__ = True
 
-stmt = insert(User).values(name=Jason, age=20).returning(User)       # Insert.returning, execute 时返回插入数据
-session.execute(stmt)                                                # 执行 sql 语句
-session.commit()                                                     # 提交数据, 令修改生效
-```
+    id = Column(Integer, primary_key=True)
 
-## 查询数据
+    def __init__(self):
+        pass
 
-sqlalchemy 1.x 使用 session.query 查询数据
+    def get(self, key):
+        """ 获取对象属性 """
+        return getattr(self, key)
 
-```python
-from sqlalchemy import select
+    def set(self, key, value):
+        """ 设置对象属性 """
+        return setattr(self, key, value)
 
-session.query(User).filter(User.age == 18).first()                   # sqlalchemy 1.x 获取单个数据
-session.query(User).filter(User.age == 18).all()                     # sqlalchemy 1.x 批量获取数据
+    def update(self, items):
+        """ 更新对象属性 """
+        for key, value in items.items():
+            setattr(self, key, value)
 
-stmt = select(User).where(User.age == 18)                            #
-session.execute(stmt).scalar()                                       # sqlalchemy 2.x 获取单个数据
-session.execute(stmt).scalars()                                      # sqlalchemy 2.x 批量获取数据
+    def json(self):
+        """ 对象转为 json """
+        return {col.name: getattr(self, col.name, None) for col in self.__table__.columns}
 
-session.commit()
-```
+    def __repr__(self):
+        return f'<Table id:{self.id}>'
 
-```py
-stmt = select(User).where(User.age == 18).order_by(User.id)          # 查询数据并按 id 排序
-session.execute(stmt)
-session.commit()
-```
+class User(Table):
+    """ 继承表基类, 创建用户表 """
 
-## 更新数据
-
-```python
-from sqlalchemy import update
-
-user = session.query(User).filter(User.age == 18).first()            # 通过 query 筛选出单个数据
-user.age = 19                                                        # sqlalchemy 1.x 更新单个数据
-session.query(User).filter(User.age == 18).update({"age": 19})       # sqlalchemy 1.x 批量更新
-
-session.execute(update(User).where(User.age == 18), {"age": 19})     # sqlalchemy 2.x 批量更新
-session.execute(update(User).where(User.age == 18).values(age=19))
-
-session.commit()
-```
-
-## 删除数据
-
-```python
-from sqlalchemy import delete
-
-session.delete(session.query(User).filter(User.age == 18).first())   # sqlalchemy 1.x 删除单个数据
-session.query(User).filter(User.age == 18).delete()                  # sqlalchemy 1.x 批量删除数据
-
-session.execute(delete(User).where(User.age == 18))                  # sqlalchemy 2.x 批量删除数据
-
-session.commit()
-```
-
-## 自定义封装
-
-```python
-from sqlalchemy import create_engine, select, update, delete, insert, Column, Integer, String
-from sqlalchemy.orm import declarative_base, sessionmaker, Session
-
-path = "/root/Desktop/Python/fastapi/database/fastapi.db"
-engine = create_engine(f"sqlite:///{path}",
-    echo=True,future=True,
-)
-
-Base = declarative_base()
-Base.metadata.create_all(engine, checkfirst=True)
-
-class DB:
-    def __new__(cls) -> None:
-        cls.session = Session(engine)
-
-    @classmethod
-    def insert(cls, table: Base, *lines:dict):
-        array = cls.session.execute(insert(table).returning(table), lines)
-        cls.session.commit()
-        return array.all()
-
-    @classmethod
-    def select(cls, table: Base, expr: str, first:bool=False):
-        sql = select(table).where(eval(expr) if expr else True)
-        return cls.session.scalar(sql) if first else cls.session.scalars(sql)
-
-    @classmethod
-    def update(cls, table: Base, expr: str, *lines:dict):
-        sql, lines = (update(table).where(eval(expr)), lines) if expr else (update(table), list(lines))
-        cls.session.execute(sql, lines)
-        cls.session.commit()
-
-    @classmethod
-    def delete(cls, table: Base, expr: str):
-        array = cls.session.execute(delete(table).where(eval(expr)).returning(table))
-        cls.session.commit()
-        return array.all()
-
-class DB:
-
-    def __new__(cls) -> None:
-        cls.session = sessionmaker(bind=engine)()
-
-    @classmethod
-    def add(cls, *lines: Base):
-        cls.session.add_all(list(lines))
-        cls.session.commit()
-
-    @classmethod
-    def select(cls, table: Base, expression: str, first: bool=False):
-        table = cls.session.query(table)
-        array = table.filter(eval(expression)) if expression else table
-        return array.first() if first else array
-
-    @classmethod
-    def update(cls, table: Base, expression:str, target:dict, first: bool=False):
-        if first:
-            line, key, value = cls.select(table, expression, True), target.popitem()
-            setattr(line, key, value)
-        else:
-            cls.session.query(table).filter(eval(expression)).update(target)
-        cls.session.commit()
-
-    @classmethod
-    def delete(cls, table: Base, expression:str, first: bool=False):
-        if first:
-            cls.session.delete(cls.select(table, expression, True))
-        else:
-            cls.session.query(table).filter(eval(expression)).delete()
-        cls.session.commit()
-
-class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
     age = Column(Integer)
 
+    def __init__(self, name, age):
+        super().__init__()
+        self.name = name
+
     def __repr__(self):
         return f"<User(id={self.id}, name={self.name}, age={self.age})>"
-
-
-if __name__ == "__main__":
-    pass
 ```
