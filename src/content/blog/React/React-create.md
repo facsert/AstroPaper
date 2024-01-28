@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-11-20 09:20:27
 title: React Configuration
-postSlug: ""
+slug: React Configuration
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "React 基本配置"
  * @LastEditTime : 2023-11-20 10:44:50
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 使用 vite 构建 React 项目
 

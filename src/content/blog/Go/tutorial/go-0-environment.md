@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-12 09:29:19
 title: 00.Go Environment
-postSlug: ""
+slug: 00.Go Environment
 featured: false
 draft: false
 tags:
@@ -17,9 +17,7 @@ description: "Go 环境配置"
  * @Description  : edit description
 -->
 
-[安装](#安装)
-[版本管理](#版本管理)
-[开始](#开始)
+## Table of Contents
 
 ## 安装
 

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-29 15:28:43
 title: 07.Go Interface
-postSlug: ""
+slug: 07.Go Interface
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 接口"
  * @LastEditTime : 2023-07-28 11:40:03
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 引申
 

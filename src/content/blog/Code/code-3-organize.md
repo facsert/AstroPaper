@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-10-21 21:20:45
 title: 组织代码
-postSlug: ""
+slug: 组织代码
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "组织代码功能"
  * @LastEditTime : 2023-07-28 11:46:11
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 - 模块化
 - 分离工具代码

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-08-28 15:28:43
 title: zsh
-postSlug: ""
+slug: zsh
 featured: false
 draft: false
 tags:
@@ -18,11 +18,7 @@ description: "zsh 是一个高效美观的 shell"
  * @Description  : edit description
 -->
 
-[zsh 介绍](#zsh-介绍)
-[安装与配置](#安装与配置)
-[主题](#主题)
-[功能](#功能)
-[插件](#插件)
+## Table of Contents
 
 ## zsh 介绍
 

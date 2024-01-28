@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-23 15:28:43
 title: NodeJS config
-postSlug: Node base config
+slug: NodeJS config
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "NodeJS 基本配置"
  * @LastEditTime : 2023-12-15 23:02:39
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## Download and Update
 

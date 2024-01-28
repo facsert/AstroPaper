@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-24 12:08:37
 title: Python Class
-postSlug: ""
+slug: Python Class
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Python 类方法"
  * @LastEditTime : 2023-07-28 17:05:27
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 引申
 

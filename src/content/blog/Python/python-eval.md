@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-08-30 12:08:37
 title: Python eval
-postSlug: ""
+slug: Python eval
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Python 标准函数 eval exec"
  * @LastEditTime : 2023-09-27 21:04:25
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## eval
 

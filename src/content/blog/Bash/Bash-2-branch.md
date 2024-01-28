@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2022-07-03 17:44:44
+modDatetime:
 title: 02.Bash Branch
-postSlug: ""
+slug: 02.Bash Branch
 featured: false
 draft: false
 tags:
@@ -20,6 +21,8 @@ description: "Bash 条件分支"
 [if 分支](#if-分支)
 [表达式](#表达式)
 [case 分支](#case-分支)
+
+## Table of Contents
 
 ## if 分支
 

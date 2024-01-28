@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-13 15:28:43
 title: 03.Go List And Slice
-postSlug: ""
+slug: 03.Go List And Slice
 featured: false
 draft: false
 tags:
@@ -17,8 +17,7 @@ description: "Go 数组和切片"
  * @Description  : edit description
 -->
 
-[数组](#数组)
-[切片](#切片)
+## Table of Contents
 
 ## 数组
 

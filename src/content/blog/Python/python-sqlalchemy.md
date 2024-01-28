@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-12-08 21:36:15
 title: Python sqlalchemy
-postSlug: ""
+slug: Python sqlalchemy
 featured: false
 draft: false
 tags:
@@ -19,6 +19,8 @@ description: "Python ORM 模块 sqlalchemy"
  * @Description:
 -->
 
+## Table of Contents
+
 sqlalchemy 是 python 的ORM(Object-relational mapping 对象关系映射)框架,  
 通过对象和数据库表之间进行映射，从而实现对象对数据库的操作.
 
@@ -32,7 +34,7 @@ sqlalchemy 是 python 的ORM(Object-relational mapping 对象关系映射)框架
 
 ## 连接
 
-`sqlalchemy` 会根据数据库驱动自动创建数据库文件并连接数据库
+`sqlalchemy` 会根据数据库驱动自动创建数据库文件并连接数据库  
 
 ```py
 from sqlalchemy import create_engine
@@ -56,7 +58,7 @@ engine = create_engine(
 ## 创建表
 
 `sqlalchemy` 内置 `declarative_base` 用于创建表的基类,  
-所有继承该类的类都会在注册到内存后自动创建表
+所有继承该类的类都会在注册到内存后自动创建表  
 
 创建 `models.py` 文件, 继承 `Base` 类, 定义表模型
 
@@ -77,7 +79,7 @@ class User(Base):
         return f"<User(id={self.id}, name={self.name}, age={self.age})>"
 ```
 
-注: 更多表数据类型 [数据类型](#表数据类型)
+注: 更多表数据类型 [数据类型](#表数据类型)  
 
 创建 `sql.py` 文件, 进行数据库连接并创建表
 
@@ -150,7 +152,7 @@ from sqlalchemy import select
 db.query(User).filter(User.age == 18).first()                        # sqlalchemy 1.x 获取单个数据
 db.query(User).filter(User.age == 18).all()                          # sqlalchemy 1.x 批量获取数据
 
-stmt = select(User).where(User.age == 18)
+stmt = select(User).where(User.age == 18)                                
 db.execute(stmt).scalar()                                            # sqlalchemy 2.x 获取单个数据
 db.execute(stmt).scalars()                                           # sqlalchemy 2.x 批量获取数据
 
@@ -222,7 +224,7 @@ JSON        : 字典类型 Column('data', JSON) => {"data": {"a": 1, "b": 2}}
 ### 表模块封装
 
 创建一个基类表, 并赋予一些基本功能  
-便于表数据与基本数据的转换与变更
+便于表数据与基本数据的转换与变更  
 
 ```py
 class Table(Base):
@@ -245,7 +247,7 @@ class Table(Base):
         """ 更新对象属性 """
         for key, value in items.items():
             setattr(self, key, value)
-
+            
     def json(self):
         """ 对象转为 json """
         return {col.name: getattr(self, col.name, None) for col in self.__table__.columns}
@@ -256,9 +258,9 @@ class Table(Base):
 class User(Table):
     """ 继承表基类, 创建用户表 """
 
-    __tablename__ = 'users'
+    __tablename__ = 'users'                      
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)       
     name = Column(String)
     age = Column(Integer)
 
@@ -266,6 +268,6 @@ class User(Table):
         super().__init__()
         self.name = name
 
-    def __repr__(self):
+    def __repr__(self):                                             
         return f"<User(id={self.id}, name={self.name}, age={self.age})>"
 ```

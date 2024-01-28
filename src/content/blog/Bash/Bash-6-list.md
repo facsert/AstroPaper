@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2023-10-08 21:52:12
+modDatetime: 
 title: 06.Bash List
-postSlug: ""
+slug: 06.Bash List
 featured: false
 draft: false
 tags:
@@ -18,8 +19,7 @@ description: "Bash 列表"
  * @Description:
 -->
 
-[数组](#数组)
-[关联数组](#关联数组)
+## Table of Contents
 
 ## 数组
 

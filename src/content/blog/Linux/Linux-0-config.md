@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-11-01 21:22:09
 title: Linux Configuration
-postSlug: ""
+slug: Linux Configuration
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Linux 配置"
  * @LastEditTime : 2023-11-01 21:22:09
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 Linux 配置
 
@@ -94,6 +96,15 @@ Debian vim 初始设置难以使用, 修改 vim 配置文件
  #PasswordAuthentication no
  PasswordAuthentication yes                      # 允许用户密码作为口令验证
 
+ $ systemctl restart sshd                        # 重启 ssh 服务，令配置生效
+ $ service sshd restart                          # 重启 ssh 服务，令配置生效
+```
+
+```bash
+ $ /usr/sbin/sshd -T                             # 测试 ssh 配置文件 /etc/ssh/sshd_config
+ > sshd: no hostkeys available -- exiting.       # 提示没有 hostkey
+
+ $ ssh-keygen -A                                 # 生成 hostkey
  $ systemctl restart sshd                        # 重启 ssh 服务，令配置生效
 ```
 

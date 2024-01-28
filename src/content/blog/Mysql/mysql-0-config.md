@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-09-12 20:17:32
 title: Mysql Configuration
-postSlug: ""
+slug: Mysql Configuration
 featured: false
 draft: false
 tags:
@@ -17,6 +17,8 @@ description: "Mysql 基本配置"
  * @LastEditors: facsert
  * @Description:
 -->
+
+## Table of Contents
 
 通过 docker 拉取 mysql 镜像  
 根据镜像生成容器, 配置文件和端口映射, 设置 root 密码  

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-09-27 15:28:43
 title: Go Pointer
-postSlug: ""
+slug: Go Pointer
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 指针"
  * @LastEditTime : 2023-10-11 22:11:14
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 指针
 

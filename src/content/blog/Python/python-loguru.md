@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-11-23 08:58:24
 title: Python loguru
-postSlug: ""
+slug: Python loguru
 featured: false
 draft: false
 tags:
@@ -17,7 +17,7 @@ description: "Python 日志模块 loguru"
  * @Description  : edit description
 -->
 
-# loguru
+## Table of Contents
 
 ## 介绍
 

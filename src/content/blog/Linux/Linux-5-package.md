@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-04-07  15:28:43
 title: Linux Package
-postSlug: ""
+slug: Linux Package
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Linux 包管理"
  * @LastEditTime : 2023-07-28 12:00:50
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 包管理工具
 

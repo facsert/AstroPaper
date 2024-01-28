@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-25 15:28:43
 title: Go Branch
-postSlug: ""
+slug: Go Branch
 featured: false
 draft: false
 tags:
@@ -17,9 +17,7 @@ description: "Go 条件分支"
  * @Description  : edit description
 -->
 
-[if 分支](#if-else-分支)
-[for 循环](#for-循环)
-[switch](#switch-case)
+## Table of Contents
 
 ## if else 分支
 

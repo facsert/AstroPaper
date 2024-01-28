@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-04-14 15:28:43
 title: Mongo Configuration
-postSlug: ""
+slug: Mongo Configuration
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Mongo 基本配置"
  * @LastEditTime : 2023-07-28 11:46:45
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 示例
 

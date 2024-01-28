@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-10-10 15:28:43
 title: Docker config
-postSlug: ""
+slug: Docker config
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Docker 基本配置"
  * @LastEditTime : 2023-12-06 20:35:54
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 安装
 

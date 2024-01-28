@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-09 09:29:19
 title: Go Swagger
-postSlug: ""
+slug: Go Swagger
 featured: false
 draft: false
 tags:
@@ -18,6 +18,8 @@ description: "Swagger UI 配置 Gin API"
  * @LastEditTime : 2023-07-28 11:38:21
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 安装
 
@@ -108,7 +110,7 @@ func webRoot(context *gin.Context) {
 }
 ```
 
-![main](./assets/swag-api.png)
+<!-- ![main](../assets/Swag-api.png) -->
 
 | 字段        | 说明                 | 示例                                     |
 | :---------- | :------------------- | :--------------------------------------- |

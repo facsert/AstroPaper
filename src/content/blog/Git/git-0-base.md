@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-08 10:17:53
 title: Git Base
-postSlug: git basic usage
+slug: Git Base
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Git 基本使用"
  * @LastEditTime : 2022-12-15 22:57:12
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## Git 介绍
 

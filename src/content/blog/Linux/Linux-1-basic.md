@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-19 15:28:43
 title: Linux Basic
-postSlug: ""
+slug: Linux Basic
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Linux 基础使用"
  * @LastEditTime : 2023-07-29 16:29:55
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 [linux 命令](https://www.linuxcool.com/)
 

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-11-01 09:15:02
 title: Docker Registry
-postSlug: ""
+slug: Docker Registry
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Docker 私有仓库"
  * @LastEditTime : 2023-11-06 09:40:32
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 创建本地 docker 仓库
 

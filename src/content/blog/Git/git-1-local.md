@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-08 10:17:53
 title: Git Local Repository
-postSlug: ""
+slug: Git Local Repository
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Git 本地仓库"
  * @LastEditTime : 2022-12-15 23:00:54
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 介绍
 

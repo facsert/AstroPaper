@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-31 17:02:03
 title: Go Module
-postSlug: ""
+slug: Go Module
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 模块"
  * @LastEditTime : 2023-07-31 17:02:40
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 使用 `import` 关键字引入官方库, 自定义包或第三方库
 

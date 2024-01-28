@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-08 10:17:53
 title: Git Remote Repository
-postSlug: ""
+slug: Git Remote Repository
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Git 远端仓库"
  * @LastEditTime : 2022-12-15 23:01:55
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 介绍
 

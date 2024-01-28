@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-19 19:21:13
 title: 01.Go Variable
-postSlug: ""
+slug: 01.Go Variable
 featured: false
 draft: false
 tags:
@@ -17,10 +17,7 @@ description: "Go 变量"
  * @Description  : edit description
 -->
 
-[变量](#变量)
-[常量](#常量)
-[打印](#打印)
-[附录](#附录)
+## Table of Contents
 
 ## 变量
 

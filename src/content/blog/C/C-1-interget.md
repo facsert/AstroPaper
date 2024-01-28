@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-10 20:17:12
 title: C Number
-postSlug: ""
+slug: C Number
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "C 数字类型"
  * @LastEditTime : 2023-07-28 11:46:29
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 整形
 

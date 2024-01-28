@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-27 15:28:43
 title: 06.Go Struct
-postSlug: ""
+slug: 06.Go Struct
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 结构体"
  * @LastEditTime : 2023-07-28 11:39:56
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## Struct
 

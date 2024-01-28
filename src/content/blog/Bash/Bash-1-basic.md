@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2022-07-03 15:44:44
+modDatetime:
 title: 01.BASH Basic
-postSlug: ""
+slug: 01.BASH Basic
 featured: false
 draft: false
 tags:
@@ -19,13 +20,7 @@ description: "Bash 基本语法"
 
 [BASH 教程](https://wangdoc.com/bash/)
 
-[介绍](#介绍)
-[语法](#语法)
-[输出](#输出)
-[变量](#变量)
-[引号](#引号)
-[变量](#变量)
-[环境变量](#环境变量)
+## Table of Contents
 
 ## 介绍
 

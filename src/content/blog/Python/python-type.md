@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-09-25 15:28:43
 title: Python Type
-postSlug: ""
+slug: Python Type
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Python 类型注解"
  * @LastEditTime : 2023-07-28 11:50:12
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 引申
 

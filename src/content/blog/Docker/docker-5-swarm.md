@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-10-30 11:14:56
 title: Docker Cluster
-postSlug: ""
+slug: Docker Cluster
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Docker 集群"
  * @LastEditTime : 2023-11-06 09:49:51
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ```bash
  # master node

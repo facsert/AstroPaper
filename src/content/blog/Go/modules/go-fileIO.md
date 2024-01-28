@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-04-02 15:28:43
 title: Go File IO
-postSlug: ""
+slug: Go File IO
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 文件 IO"
  * @LastEditTime : 2023-07-28 11:37:54
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## read file
 

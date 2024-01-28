@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-25 20:08:15
 title: Python flat dictionary
-postSlug: ""
+slug: Python flat dictionary
 featured: false
 draft: false
 tags:
@@ -16,6 +16,7 @@ description: "Python 扁平化字典"
  * @LastEditTime: 2023-09-27 21:05:42
  * @Description  : edit description
 -->
+## Table of Contents
 
 ## 引申
 

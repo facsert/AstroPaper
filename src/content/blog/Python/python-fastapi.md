@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-10-28 14:52:02
 title: Python fastapi
-postSlug: ""
+slug: Python fastapi
 featured: false
 draft: false
 tags:
@@ -18,6 +18,8 @@ description: "Python Web 框架 fastapi"
  * @LastEditors: facsert
  * @Description:
 -->
+
+## Table of Contents
 
 ## 介绍
 

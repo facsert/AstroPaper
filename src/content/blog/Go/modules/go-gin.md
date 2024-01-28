@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-10 09:29:19
 title: Go Gin
-postSlug: ""
+slug: Go Gin
 featured: false
 draft: false
 tags:
@@ -21,6 +21,8 @@ description: "Go Web 框架 Gin"
 [Gin官网](https://gin-gonic.com/zh-cn/)
 
 Gin 是一个用 Go (Golang) 编写的 HTTP Web 框架
+
+## Table of Contents
 
 ## 安装
 

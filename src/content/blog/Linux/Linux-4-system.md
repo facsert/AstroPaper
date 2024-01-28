@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-04-07 15:02:16
 title: Linux System
-postSlug: ""
+slug: Linux System
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Linux 系统"
  * @LastEditTime : 2023-07-28 12:00:50
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 系统
 

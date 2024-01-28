@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-12-06 22:05:18
 title: Postgresql configuration
-postSlug: ""
+slug: Postgresql configuration
 featured: false
 draft: false
 tags:
@@ -17,6 +17,8 @@ description: "Postgresql 配置"
  * @LastEditors: facsert
  * @Description:
 -->
+
+## Table of Contents
 
 ```bash
  $ psql                                          # 进入postgresql 命令行

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-10-25 11:56:31
 title: Python Magic Method
-postSlug: ""
+slug: Python Magic Method
 featured: false
 draft: false
 tags:
@@ -16,6 +16,7 @@ description: "Python 魔术方法"
  * @LastEditTime : 2023-10-25 15:16:58
  * @Description  : edit description
 -->
+## Table of Contents
 
 ## **new** and **init**
 

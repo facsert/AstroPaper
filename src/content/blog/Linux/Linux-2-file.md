@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-18 15:02:16
 title: Linux File
-postSlug: ""
+slug: Linux File
 featured: false
 draft: false
 tags:
@@ -17,7 +17,7 @@ description: "Linux 文件操作"
  * @Description  : edit description
 -->
 
-# Linux File
+## Table of Contents
 
 ## 特殊目录文件
 

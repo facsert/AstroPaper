@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-12-31 19:20:23
 title: vim
-postSlug: ""
+slug: vim
 featured: false
 draft: false
 tags:
@@ -10,6 +10,8 @@ tags:
   - Tool
 description: vim 是一个使用广泛的文件编辑器
 ---
+
+## Table of Contents
 
 ## 介绍
 
@@ -27,10 +29,10 @@ vim 是一个使用广泛的文件编辑器，它支持多种编程语言，并�
 ## 配置
 
 使用 `vi /etc/vim/vimrc`, 编辑 vim 配置  
-配置文件使用 `"` 作为注释符号
+配置文件使用 `"` 作为注释符号  
 
 ```bash
- set nu           "在左侧行号
+ set nu           "在左侧行号                                                
  set tabstop=4    "tab 长度设置为 4
  set nobackup     "覆盖文件时不备份
  set cursorline   "突出显示当前行
@@ -68,11 +70,11 @@ gg, G 文档开头, 文档末尾
 ### 剪切内容
 
 ```bash
-x     剪切当前字符
-X     剪切当前字符前一个
-dd    剪切当前行
-dw    剪切当前单词
-d$    剪切当前行到行尾
+x     剪切当前字符       
+X     剪切当前字符前一个 
+dd    剪切当前行         
+dw    剪切当前单词       
+d$    剪切当前行到行尾   
 d0    剪切当前行到行首
 
 d<n>j 剪切当前行及其后 n 行
@@ -86,10 +88,10 @@ p     黏贴剪切板内容
 ### 复制内容
 
 ```bash
-yy    复制当前行
-yw    复制当前单词
-y$    复制当前行到行尾
-y0    复制当前行到行首
+yy    复制当前行         
+yw    复制当前单词      
+y$    复制当前行到行尾   
+y0    复制当前行到行首   
 y^    复制当前行到行首(非空白字符)
 
 y<n>j 复制当前行及其后 n 行

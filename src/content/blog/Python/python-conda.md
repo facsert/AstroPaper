@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-09-27 21:03:53
 title: Python Anaconda
-postSlug: ""
+slug: Python Anaconda
 featured: false
 draft: false
 tags:
@@ -20,6 +20,8 @@ description: "Python 版本控制工具 Anaconda"
 -->
 
 Anaconda 是一个 python 版本管理器, 能快速创建虚拟环境, 管理 python 版本,安装包等.
+
+## Table of Contents
 
 ## 安装
 

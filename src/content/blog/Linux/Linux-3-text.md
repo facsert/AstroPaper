@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2022-07-19 15:28:43
 title: Linux Text
-postSlug: ""
+slug: Linux Text
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Linux 文本操作"
  * @LastEditTime : 2023-10-08 21:32:25
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 文本搜索
 

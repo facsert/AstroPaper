@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-05-23 15:28:43
 title: 02.Go Base Data Type
-postSlug: ""
+slug: 02.Go Base Data Type
 featured: false
 draft: false
 tags:
@@ -19,11 +19,7 @@ description: "Go 基本数据类型"
 
 Golang 基本类型有
 
-[整形](#整形)
-[浮点型](#浮点型)
-[布尔类型](#布尔类型)
-[字符串](#字符串类型)
-[类型转换](#类型转换)
+## Table of Contents
 
 ## 整形
 

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-12-08 21:26:43
 title: Prometheus
-postSlug: ""
+slug: Prometheus
 featured: false
 draft: false
 tags:
@@ -19,14 +19,7 @@ description: "自动化运维监控工具 Prometheus"
  * @Description:
 -->
 
-- [工具介绍](#工具介绍)  
-- [prometheus](#prometheus)  
-- [node_exporter](#node_exporter)  
-- [grafana](#grafana)  
-- [process_exporter](#process_exporter)  
-- [loki](#loki)  
-- [promtail](#promtail)  
-- [alertmanager](#alertmanager)  
+## Table of Contents
 
 ## 工具介绍
 
@@ -113,6 +106,12 @@ scrape_configs:
  $ ./node_exporter
  > ts=1970-02-06T18:49:59.679Z caller=tls_config.go:274 level=info msg="Listening on" address=0.0.0.0:9100
  > ts=1970-02-06T18:49:59.679Z caller=tls_config.go:277 level=info msg="TLS is disabled." http2=false address=0.0.0.0:9100
+
+ # 自定义 HOST 和 端口
+ $ ./node_exporter --web.listen-address 127.0.0.1:8080
+ 
+ # 指定配置文件
+ $ ./node_exporter --web.config.file="config.yaml"
 ```
 
 浏览器打开 `http://localhost:9100` 进入 node_exporter 控制台  
@@ -274,7 +273,7 @@ server:
 positions:
   filename: /tmp/positions.yaml
 
-clients: # 机器需要与 loki 服务通信
+clients:                                            # 机器需要与 loki 服务通信
   - url: http://193.168.1.123:3100/loki/api/v1/push # url 需与 loki 路由和端口一致
 
 scrape_configs:
@@ -357,12 +356,10 @@ inhibit_rules:
     equal: ["alertname", "dev", "instance"]
 ```
 
-
 group_by: 分组方式, 按 prometheus 告警规则配置文件内的 labels 下的字段值相同为一组  
 group_wait: 触发组内第一个告警后, 先不发告警, 等待 group_wait 时间, 看是否有同组告警, 有则合并告警, 仅发送一次  
 group_interval: 组内已发送告警后, 同组出现新告警; 先不发, 等待 group_interval 时间, 看是否有同组新告警, 连同已发送信息, 并合并再次发送  
 repeat_interval: 已发送告警, 告警一直未复位; 等待 repeat_interval 时间, 再次发送同样的告警
-
 
 使用 prometheus 监控 node1 node2 node3 机器
 

@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2023-06-12 10:03:49
+modDatetime: 
 title: 05.Bash String
-postSlug: ""
+slug: 05.Bash String
 featured: false
 draft: false
 tags:
@@ -17,12 +18,7 @@ description: "Bash 字符串"
  * @Description  : edit description
 -->
 
-[基本属性](#基本属性)
-[大小写](#大小写)
-[筛选](#筛选)
-[删除与替换](#删除和替换)
-[子字符串](#子字符串)
-[定位](#定位)
+## Table of Contents
 
 ## 基本属性
 

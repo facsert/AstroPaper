@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-10 14:24:30
 title: Go Generics
-postSlug: ""
+slug: Go Generics
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 泛型"
  * @LastEditTime : 2023-11-27 22:16:03
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## 类型约束
 

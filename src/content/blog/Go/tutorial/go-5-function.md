@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-28 15:28:43
 title: 05.Go Function
-postSlug: ""
+slug: 05.Go Function
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go 函数"
  * @LastEditTime : 2023-07-28 11:39:45
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## function 定义
 

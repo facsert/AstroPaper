@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2023-10-09 20:03:44
+modDatetime: 
 title: 04.Bash Function
-postSlug: ""
+slug: 04.Bash Function
 featured: false
 draft: false
 tags:
@@ -18,10 +19,7 @@ description: "Bash 函数"
  * @Description:
 -->
 
-[函数定义](#函数定义)
-[函数调用](#函数调用)
-[函数返回](#函数返回)
-[变量作用域](#变量作用域)
+## Table of Contents
 
 ## 函数定义
 

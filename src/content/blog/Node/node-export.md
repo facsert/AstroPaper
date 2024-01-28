@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-11-18 18:30:59
 title: NodeJS export
-postSlug: ""
+slug: NodeJS export
 featured: false
 draft: false
 tags:
@@ -17,6 +17,8 @@ description: "NodeJS 模块引入和导出"
  * @LastEditors: facsert
  * @Description:
 -->
+
+## Table of Contents
 
 早期历史原因, javascript 划分了 commonjs 模块和 EMCAScript 模块, 两种模块的导出和引入方式统统
 

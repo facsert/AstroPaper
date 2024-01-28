@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-10-30 09:59:08
 title: Kbernetes Configuration
-postSlug: ""
+slug: Kbernetes Configuration
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Kbernetes 配置"
  * @LastEditTime : 2023-11-06 21:10:34
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## Install
 

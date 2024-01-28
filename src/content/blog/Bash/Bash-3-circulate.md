@@ -1,8 +1,9 @@
 ---
 author: facsert
 pubDatetime: 2023-10-08 21:50:45
+modDatetime:
 title: 03.Bash Loop
-postSlug: ""
+slug: 03.Bash Loop
 featured: false
 draft: false
 tags:
@@ -18,8 +19,7 @@ description: "Bash 循环语法"
  * @Description:
 -->
 
-[for 循环](#for-循环)
-[循环](#while-循环)
+## Table of Contents
 
 ## for 循环
 

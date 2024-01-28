@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-28 09:31:54
 title: Go SSH
-postSlug: ""
+slug: Go SSH
 featured: false
 draft: false
 tags:
@@ -17,6 +17,8 @@ description: "Go SSH 连接"
  * @LastEditTime : 2023-07-28 11:35:22
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 Go 实现 ssh 连接远端并发送命令执行  
 `golang.org/x/crypto/ssh`

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-03-23 15:28:43
 title: 04.Go Map
-postSlug: ""
+slug: 04.Go Map
 featured: false
 draft: false
 tags:
@@ -16,6 +16,8 @@ description: "Go Map 类型数据"
  * @LastEditTime : 2023-09-07 22:22:44
  * @Description  : edit description
 -->
+
+## Table of Contents
 
 ## Map
 

@@ -2,7 +2,7 @@
 author: facsert
 pubDatetime: 2023-07-10 19:20:02
 title: C Basic
-postSlug: ""
+slug: C Basic
 featured: false
 draft: false
 tags:
@@ -16,6 +16,7 @@ description: "C 语言基本介绍"
  * @LastEditTime : 2023-07-28 11:46:18
  * @Description  : edit description
 -->
+## Table of Contents
 
 ## 示例
 
