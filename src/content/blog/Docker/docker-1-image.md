@@ -62,6 +62,10 @@ description: "Docker 镜像"
        --disable-content-trust   Skip image verification (default true)
 
  $ docker pull ubuntu:20.04
+
+ # 下载指定平台的镜像
+ $ docker pull --platfrom linux/amd64 mysql
+ $ docker pull --platfrom linux/arm64 mysql
 ```
 
 从私有仓库拉取镜像前需要先登录, 然后指定仓库中的镜像拉取  
@@ -115,9 +119,13 @@ description: "Docker 镜像"
 ```bash
  $ docker save [OPTIONS] IMAGE [IMAGE...]
  $ docker save 0850fead9327 > mongo.tar.gz
+ $ docker save -o mysql.tar mysql:lates
 
  $ ll
  > -rw-r--r-- 1 root  root   23K Mar  7 21:10 mongo.tar.gz
+
+ # 导入镜像
+ $ docker load -i mysql.tar
 ```
 
 - 镜像历史

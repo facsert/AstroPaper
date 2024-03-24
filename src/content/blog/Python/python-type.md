@@ -29,7 +29,7 @@ description: "Python 类型注解"
 动态语言的变量没有类型, 变量的类型由值的类型决定
 
 ```python
- name = "facser"                                 # python 是动态语言
+ name = "John"                                   # python 是动态语言
  name = 18                                       # 变量无需声明类型, 可接受任意类型的值
  name = [1,2,3]                                  # 变量可随意变换类型, 类型仅在执行时确定
 ```
@@ -131,7 +131,7 @@ Callable[[args_type], return_type]
  from typing import Callable
 
  def func(name: str) -> None:                    # 函数类型注解, 无返回值则默认返回 None
-     print(f"hellow {name}")
+     print(f"hello {name}")
 
   foo: Callable[[str], None] = func              # 函数类型注解, 第一个参数是函数参数类型, 第二个是返回值类型
 
@@ -164,26 +164,24 @@ Callable[[args_type], return_type]
  from typing import NewType
 
 matrix = NewType('matrix', list[list[int]])      # 自定义类型并命名
-nums = NewType('nums', list[int])
+numbers = NewType('numbers', list[int])
 strings = NewType('strings', str)
 
 a: matrix = matrix([[1,2], [2,3]])               # 需要实例化赋值
-b: nums = nums([1,2,3])
+b: numbers = numbers([1,2,3])
 c: strings = strings('str')
 ```
 
 ### 类型别名
 
 ```python
-
  matrix = list[list[int]]                        # 自定义类型并命名
- nums = list[int]
+ numbers = list[int]
  strings = str
 
  a: matrix = matrix([[1,2], [2,3]])              # 无需实例化与正常类型解一致
- b: nums = nums([1,2,3])
+ b: numbers = numbers([1,2,3])
  c: strings = strings('str')
-
 ```
 
 ### class

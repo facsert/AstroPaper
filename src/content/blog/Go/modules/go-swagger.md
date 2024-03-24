@@ -26,7 +26,7 @@ description: "Swagger UI 配置 Gin API"
 下载 swagger 关联的库
 
 ```bash
- $ go get -u github.com/swaggo/swag/cmd/swag     # 命令行工具
+ $ go get -u github.com/swaggo/swag/cmd/swag     # swag 命令行工具
  $ go get -u github.com/swaggo/gin-swagger
  $ go get -u github.com/swaggo/files
 
@@ -39,37 +39,49 @@ description: "Swagger UI 配置 Gin API"
 
 ## 通用注解
 
-go swagger 通过注释绑定接口设置和显示内容
+go swagger 通过注释绑定接口设置和显示内容  
+[Github swag](https://github.com/swaggo/swag)
 
 ```go
 package main
 
 import (
-    "github.com/gin-gonic/gin"                   // 引入 gin
-    swaggerFiles "github.com/swaggo/files"
-    ginSwagger "github.com/swaggo/gin-swagger"
     "net/http"
-    _ "swag/docs"                                // <projectName>/docs  swag 替换为项目名称
+
+    "github.com/gin-gonic/gin"                   // 引入 gin
+    "github.com/swaggo/gin-swagger"              // gin-swagger middleware
+    "github.com/swaggo/files"                    // swagger embed files
+
+    _ "swag/docs"                                // <project>/docs  swag 为项目名
 )
 
-// @title           Swagger
-// @version         1.0.0
-// @description     Swagger Test
-// @host            10.58.14.96:8080
+// @title           Swagger Example API
+// @version         1.0
+// @description     This is a sample server celler server.
+// @termsOfService  http://swagger.io/terms/
+
+// @contact.name    API Support
+// @contact.url     http://www.swagger.io/support
+// @contact.email   support@swagger.io
+
+// @license.name    Apache 2.0
+// @license.url     http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host            localhost:8080
 // @BasePath        /
 // @schemes         http https
+// @description     Swagger Test
+
+// @securityDefinitions.basic  BasicAuth
 
 // @contact.name    facsert
 // @contact.url     https://facsert.github.io/
 // @contact.email   facsert@outlook.com
 
-// @termsOfService  http://swagger.io/terms/
-// @license.name    Apache 2.0
-// @license.url     http://www.apache.org/licenses/LICENSE-2.0.html
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
 func main() {
     engine := gin.Default()
-    engine.GET("/root", webRoot)
-    engine.GET("/index", webIndex)
     engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
     engine.Run(":8080")
 }

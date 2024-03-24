@@ -19,7 +19,7 @@ description: "Mongo 基本配置"
 
 ## Table of Contents
 
-## 示例
+## Mongo 安装
 
 通过 docker 运行 mongo 数据库
 
@@ -39,8 +39,6 @@ description: "Mongo 基本配置"
 - 容器内 /data/db 目录挂载到系统 /root/Desktop/Mongo 目录下
 - 系统端口 27017 与容器内 27017 端口映射
 
-## mongo 容器
-
 ```bash
  $ docker exec -it mongodb bash
 
@@ -48,69 +46,86 @@ description: "Mongo 基本配置"
  >
 ```
 
-## mongo
-
-数据库
-集合
-文档
-
-```bash
-test                                             # 数据库名称
-    student                                      # 集合名称
-        <id1>: {'_id': <id1>, 'name': 'John'}    # 文档，类似行, 一个文档包含一个 json 数据
-        <id2>: {'_id': <id2>, 'name': 'peter'}
-    teacher                                      # 集合名称
-        <id1>: {'_id': <id1>, 'name': 'John'}    # 文档，类似行, 一个文档包含一个 json 数据
-        <id2>: {'_id': <id2>, 'name': 'peter'}
-
-```
+[Mongo Shell](https://mongodb.net.cn/manual/reference/method/)
 
 ## 数据库
 
+Mongo 中可以创建多个数据库, 数据库可以创建多个集合(类似于表), 集合用于存储数据
+
 ```js
- > show dbs                                      // 显示所有数据库
- admin    40.00 KiB
- config  108.00 KiB
- local    40.00 KiB
- test     40.00 KiB
+// 显示所有数据库
+show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
 
- > use redis                                      // 创建或切换数据库
- switched to db redis
+// 创建或切换数据库(数据库有数据才会创建, show 命令不显示)
+use person
+switched to db redis
 
- > db                                            // 显示当前数据库名称
- redis
+// 显示当前数据库名称
+db
+person
 
- > db.stats()                                    // 数据库 test 的信息
- {
-  db: 'redis',
-  collections: 0,
-  views: 0,
-  objects: 0,
+// 数据库 test 的信息
+db.stats()
+{
+  db: 'person',
+  collections: Long('0'),
+  views: Long('0'),
+  objects: Long('0'),
   avgObjSize: 0,
   dataSize: 0,
   storageSize: 0,
-  indexes: 0,
+  indexes: Long('0'),
   indexSize: 0,
   totalSize: 0,
-  scaleFactor: 1,
+  scaleFactor: Long('1'),
   fsUsedSize: 0,
   fsTotalSize: 0,
   ok: 1
- }
+}
 
- > db.dropDatabase()                             // 删除数据库 redis
- { ok: 1, dropped: 'redis' }
+// 删除数据库 person
+db.dropDatabase()
+{ ok: 1, dropped: 'person' }
 ```
 
 ## 集合
 
 ```js
- > show collections                              // 查看数据库内的所有集合
+// 查看数据库内的所有集合
+show collections
+{ ok: 1 }
 
- > db.createCollection(<name>, <option>)         // 创建集合, 并配置
- > db.createCollection("log", { capped : true, size : 5242880, max : 5000 } )
+// 创建集合, 并配置(集合有数据才会创建)
+db.createCollection(name, option)
+db.createCollection("studens", { capped : true, size : 5242880, max : 5000 })
 
- > db.log.drop()                                 // 删除 log 集合
+// 查看 studens 集合状态
+db.studens.stats()
+
+// 删除 studens 集合
+db.studens.drop()
+
+// 集合的数据数量
+db.students.countDocuments()
+```
+
+```js
+// 查看集合所有索引(排序方式, 字段约束)
+db.students.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+]
+
+// 添加 name 字段升序(1 升序, -1 降序), 且 name 字段值唯一约束(unique)
+db.students.createIndex({name: 1}, {unique: true})
+db.students.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { name: 1 }, name: 'name_1', unique: true }
+]
 ```
 
 |  option  |  type   | description                                                                                             |
@@ -119,10 +134,185 @@ test                                             # 数据库名称
 |  `size`  | number  | 设定集合最大可使用字节数。capped 为 true 时设置                                                         |
 |  `max`   | number  | 设置集合能容纳的最大文档数量。Size限制优先于数量限制。文档数量未到 max, size 到达限制时也会触发文档覆盖 |
 
-## 文档
+## 插入数据
+
+- insertOne
+- insertMany
 
 ```js
- > db.<collection>.insert(<json>)                // 指定集合插入 json 数据
- > db.<collection>.insert([<json>, <json>])      // 单次插入多个 json 数据, 与多次插入单个 json 一致
+// 插入单个数据
+db.student.insertOne({name: "John", age: 19})
+{
+  acknowledged: true,
+  insertedId: ObjectId('65d1fe9776bc4fe476eabd1a')
+}
 
+// 插入多个数据
+db.coll.insertMany([
+  { name: "lily"},
+  { name: "Alen", hobby: "swim"}
+])
+```
+
+## 查询数据
+
+- findOne
+- find
+
+```js
+// 查询匹配的第一个数据(返回匹配的第一个数据)
+db.students.findOne({name: 'lily'})
+{ _id: ObjectId('65d200a776bc4fe476eabd1e'), name: 'lily' }
+
+// 查询所有匹配的数据
+db.students.find({})
+[
+  { _id: ObjectId('65d1ff0e76bc4fe476eabd1b'), name: 'John', age: 19 },
+  { _id: ObjectId('65d200a776bc4fe476eabd1e'), name: 'lily' },
+  {
+    _id: ObjectId('65d200a776bc4fe476eabd1f'),
+    name: 'Alen',
+    hobby: 'swim'
+  }
+]
+
+// 数据范围查询($gt $gte $lt $lte $ne $in)
+db.students.find({age: {$gt: 15}})
+[
+  { _id: ObjectId('65d1ff0e76bc4fe476eabd1b'), name: 'John', age: 19 }
+]
+
+// 属性存在查询
+db.students.findOne({hobby: {$exists: true}})
+{
+  _id: ObjectId('65d200a776bc4fe476eabd1f'),
+  name: 'Alen',
+  hobby: 'swim'
+}
+
+// 值的正则匹配查询
+db.students.find({name: {$regex:'lily|John'}})
+[
+  { _id: ObjectId('65d1ff0e76bc4fe476eabd1b'), name: 'John', age: 19 },
+  { _id: ObjectId('65d200a776bc4fe476eabd1e'), name: 'lily' }
+]
+
+// 逻辑或查询
+db.students.find({$or: [{name: 'lily'}, {name: 'Alen'}]})
+[
+  { _id: ObjectId('65d200a776bc4fe476eabd1e'), name: 'lily' },
+  {
+    _id: ObjectId('65d200a776bc4fe476eabd1f'),
+    name: 'Alen',
+    hobby: 'swim'
+  }
+]
+```
+
+## 更新数据
+
+- updateOne
+- updateMany
+
+`db.coll.updateMany(filter, set)`
+
+```js
+// 更新单个数据
+db.students.updateOne({name: 'lily'}, {$set: {"age": 18} })
+db.students.findOne({name: 'lily'})
+{ _id: ObjectId('65d200a776bc4fe476eabd1e'), name: 'lily', age: 18 }
+
+// 更新多个数据
+db.students.updateMany({name: {$exists: true}}, {$set: {"description": "school student"} })
+db.students.find({})
+[
+  {
+    _id: ObjectId('65d1ff0e76bc4fe476eabd1b'),
+    name: 'John',
+    age: 19,
+    description: 'school student'
+  },
+  {
+    _id: ObjectId('65d200a776bc4fe476eabd1e'),
+    name: 'lily',
+    age: 18,
+    description: 'school student'
+  },
+  {
+    _id: ObjectId('65d200a776bc4fe476eabd1f'),
+    name: 'Alen',
+    hobby: 'swim',
+    description: 'school student'
+  }
+]
+
+// 重命名字段
+db.students.updateOne({name: 'lily'}, {$rename: {"description": "desc"} })
+db.students.findOne({name: 'lily'})
+{
+  _id: ObjectId('65d200a776bc4fe476eabd1e'),
+  name: 'lily',
+  age: 18,
+  desc: 'school student'
+}
+
+// 删除字段
+db.students.updateOne({name: 'Alen'}, {$unset: {"hobby": ""} })
+db.students.findOne({name: 'Alen'})
+{
+  _id: ObjectId('65d200a776bc4fe476eabd1f'),
+  name: 'Alen',
+  description: 'school student Alen'
+}
+```
+
+## 删除数据
+
+- deleteOne
+- deleteMany
+
+`db.coll.deleteMany(filter)`
+
+```js
+// 删除单个数据
+db.students.deleteOne({name: "Alen"})
+db.students.find({})
+[
+  {
+    _id: ObjectId('65d1ff0e76bc4fe476eabd1b'),
+    name: 'John',
+    age: 19,
+    description: 'school student'
+  },
+  {
+    _id: ObjectId('65d200a776bc4fe476eabd1e'),
+    name: 'lily',
+    age: 18,
+    desc: 'school student'
+  }
+]
+
+// 删除多个数据
+db.students.deleteMany({})
+{ acknowledged: true, deletedCount: 2 }
+db.students.find({})
+```
+
+## 备份恢复
+
+- mongodump
+- mongorestore
+
+```bash
+# 备份/恢复 mongo 全部数据到 /data/db/mongo_backup 路径下(映射路径, 方便取出)
+$ mongodump --out  /data/db/mongo_backup
+$ mongorestore  /data/db/mongo_backup
+
+# 备份和恢复指定数据库到指定路径
+$ mongodump --db database_name --out path
+$ mongorestore --db database_name --out path
+
+# 备份和恢复特定集合到指定路径
+$ mongodump --db database_name --collection coll_name --out path
+$ mongorestore --db database_name --collection coll_name  --out path
 ```

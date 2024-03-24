@@ -24,7 +24,7 @@ description: "NodeJS 基本配置"
 [nodejs 官网](https://nodejs.org/en)
 
 ```bash
- $ apt install node                              # apt 下载 node
+ $ apt install nodejs                            # apt 下载 node
  $ node -v                                       # 查看 node 版本
  > v18.17.0
 ```
@@ -39,7 +39,12 @@ nodejs 通过 n 模块更新或切换版本
  $ npm view node versions                        # node所有版本
  $ n latest                                      # 升级到最新版本
  $ n stable                                      # 升级到最新稳定版本
- $ n 18.15.0                                     # 升级到 18.15.0 版本, 某个具体版本号
+ $ n v18.15.0                                    # 升级到 18.15.0 版本, 某个具体版本号
+ $ n install --insecure v18.1.0                  # 下载 18.1.0 版本, 忽略 SSL 证书
+
+ $ n ls                                          # 列出本地所有 node 版本
+ $ n ls-remote                                   # 列出当前可下载版本
+ $ n                                             # 进入交互页面选择版本作为默认版本
 
  $ npm -v                                        # npm 版本, node 的包管理器
  > 9.5.0
@@ -49,6 +54,26 @@ nodejs 通过 n 模块更新或切换版本
  $ npm view npm version                          # 查看 npm 最新版本
  $ npm view npm versions                         # 查看 npm 所有版本
  $ npm list                                      # 已安装插件清单
+```
+
+离线切换, 将下载的 nodejs 版本包解压
+
+```bash
+ # 解压离线包, 将文件复制到 n 对应的版本文件路径下
+ $ tar -xvf node-v17.9.0-linux-x64.tar.xz
+ $ cp -rf node-v17.9.0-linux-x64/*  /usr/local/n/version/node/17.9.0/
+
+ # 在交互页面选择指定版本
+ $ n
+  ο node/17.6.0
+    node/17.9.0
+    node/18.1.0
+
+     copying : node/17.6.0
+   installed : v17.6.0 (with npm 8.5.1)
+
+ $ node -v
+ > v17.6.0
 ```
 
 ### npm 配置

@@ -86,9 +86,12 @@ Docker 安装
 ```json
 {
   "registry-mirrors": [
-    "http://hub-mirror.c.163.com",
     "https://docker.mirrors.ustc.edu.cn",
-    "https://registry.docker-cn.com"
+    "https://registry.docker-cn.com",
+    "http://hub-mirror.c.163.com",
+    "https://mirror.ccs.tencentyun.com",
+    "https://registry.mirrors.ustc.edu.cn",
+    "https://ucjisdvf.mirror.aliyuncs.com"
   ]
 }
 ```

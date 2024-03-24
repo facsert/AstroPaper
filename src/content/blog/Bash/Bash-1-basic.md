@@ -41,6 +41,9 @@ Shell 是一个提供与用户对话的环境的程序; 又称为命令行环境
  > /bin/zsh
 
  $ chsh -s /bin/bash                             # 修改当前 shell 为 bash
+ $ usermod --shell /bin/zsh root                 # 设置 root 用户默认 shell 为 zsh
+
+ $ cat /etc/passwd |grep root                    # 查看 root 用户的默认 shell
 ```
 
 ## 语法
