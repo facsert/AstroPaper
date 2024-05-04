@@ -107,3 +107,16 @@ Github 账户 -> Settings -> Developer Settings -> Personal access tokens
  > origin https://{token}@github.com/{username}/{repo}.git (fetch)
  > origin https://{token}@github.com/{username}/{repo}.git (push)
 ```
+
+## Error Resolve
+
+```bash
+$ git status
+error: object file .git/objects/f7/01097c53f5db20f18fa5edae4003c8bf9184ff is empty
+error: object file .git/objects/f7/01097c53f5db20f18fa5edae4003c8bf9184ff is empty
+fatal: loose object f701097c53f5db20f18fa5edae4003c8bf9184ff (stored in .git/objects/f7/01097c53f5db20f18fa5edae4003c8bf9184ff) is corrupt
+
+# 删除 .git 本地仓库中的空文件, 重新拉取
+$ find .git/objects/ -size 0 -exec rm -f {} \;
+$ git fetch origin
+```

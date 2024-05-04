@@ -76,12 +76,30 @@ WHERE age IN (18,19,20);
 ## 插入数据
 
 ```sql
+INSERT INTO table_name(column1, column2, …)
+VALUES
+  (value11, value12, …) [, (value21, value22, …), ...]
+[ON CONFLICT conflict_target conflict_action]
+[RETURNING expr];
+
 /* 插入数据 */
 INSERT INTO students (name, age, locked, create_at)
 VALUES
   ('John', 18, false, '2024-02-22 20:31:38'),
   ('Lily', 19, false, '2024-02-22 20:31:38');
 > INSERT 0 2
+
+/* 插入数据并返回 */
+INSERT INTO students (name, age, locked, create_at)
+VALUES
+  ('John', 18, false, '2024-02-22 20:31:38'),
+  ('Lily', 19, false, '2024-02-22 20:31:38')
+RETURNING name, create_at;
+
+name |      create_at
+----+---------------------
+John | 2024-02-22 20:31:38
+Lily | 2024-02-22 20:31:38
 
 /* 查询数据 */
 SELECT * FROM students;
@@ -96,7 +114,7 @@ SELECT * FROM students;
 ```sql
 DELETE FROM table_name
 [WHERE expression]
-[RETURNS expected];
+[RETURNING expr];;
 
 DELETE FROM students WHERE id = 3;
 > DELETE 1

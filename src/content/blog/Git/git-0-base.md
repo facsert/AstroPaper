@@ -130,4 +130,6 @@ Git 是一个开源的文件版本控制器
  > origin  git@github.com:facser/Learning.git (push)
 
  $ git remote add origin <Repository url>        # 将远程仓库命名为 origin 并关联本地仓库
+ $ git branch -M main
+ $ git push -u origin main
 ```

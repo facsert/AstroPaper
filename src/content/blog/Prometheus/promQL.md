@@ -199,7 +199,7 @@ node_cpu_seconds_total{cpu="0", instance="10.143.232.175:9100", mode="idle"} off
 node_cpu_seconds_total{cpu="0", instance="10.143.232.175:9100", mode="idle"}[1d] offset 10h
 ```
 
-## 聚会操作
+## 聚合操作
 
 对瞬时向量进行聚合操作
 
@@ -286,6 +286,15 @@ irate(node_cpu_seconds_total[2m])
 
 # 1 减去空闲百分比获得 CPU 占用百分比(按)
 1 - (sum by(instance) (irate(node_cpu_seconds_total{mode="idle"}[2m])) / sum by(instance) (irate(node_cpu_seconds_total[2m])))
+```
+
+```bash
+# 注: sum by 语句后仅保留设置的索引, 类似于 pandas 的 groupby
+sum by(job,instance) (node_cpu_seconds_total{mode="idle"})
+{instance="10.121.238.42:1100", job="V2-Node"}        192876.24
+{instance="10.121.238.42:2100", job="V2-Node"}        1113100.96
+{instance="10.121.238.42:6100", job="V2-Node"}        1156084.41
+{instance="10.121.238.42:7100", job="V2-Node"}        1154130.68
 ```
 
 ### 内存占用

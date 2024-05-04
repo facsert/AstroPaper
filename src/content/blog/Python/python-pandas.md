@@ -178,6 +178,7 @@ for i, r in df.iterrows():
 
 # 修改列
 df['name'] = df['name'].apply(lambda x: "pre_" + x)
+df['name'] = df['name'].transform(lambda x: "pre_" + x)
 df['name'] = 'pre' + df['name']
 >     name age height
 > a  pre_A  16   1.75

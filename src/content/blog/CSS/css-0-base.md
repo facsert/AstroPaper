@@ -205,7 +205,7 @@ font-size：用于指定文字的大小
 font-weight：用于指定文字的粗细程度  
 color：用于指定文字的颜色  
 text-shadow: 文字阴影  
-text-decoration: 文本装饰, nonde, underline(下划线), line-through(删除线)
+text-decoration: 文本装饰, none, underline(下划线), line-through(删除线)
 
 text-align：用于指定文字的对齐方式，例如left、center或right  
 line-height: 行高, 行与行间的距离
@@ -229,8 +229,8 @@ p {
 | 描述 | 内边距(边框和内容距离) | 边框(边框厚度) | 外边距(边框与外部距离) |
 
 标准盒模型 width, height 指定的是盒子内容大小, 实际占用大小需要加上内边距, 边框, 外边距  
-box_width = width + 2 _ border + padding-left + padding-right + margin-left + margin-right  
-box_height = height + 2 _ border + padding-top + padding-bottom + margin-top + margin-bottom
+box_width = width + 2*border + padding-left + padding-right + margin-left + margin-right  
+box_height = height + 2*border + padding-top + padding-bottom + margin-top + margin-bottom
 
 ```css
 .box {
