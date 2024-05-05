@@ -19,10 +19,6 @@ description: "简化代码控制流"
 
 ## Table of Contents
 
-- 分支
-- 边界
-- 变量的逻辑
-
 ## 分支
 
 - 最小化嵌套
@@ -30,32 +26,31 @@ description: "简化代码控制流"
 
 ### 最小化嵌套
 
-提前退出
-优先解决简单问题
+提前退出, 优先解决简单问题
 
 ```python
-if sut_os_connect():
-    if sut_tool_exist():
-        if sut_bmc_version():
-            # flash BMC
+if connect_client():
+    if file_exist():
+        if read_file():
+            # read file success
         else:
-            return 'get BMC version failed'
+            return 'read file failed'
     else:
-        return 'tool not exist'
+        return 'file not exist'
 else:
-    return 'sut os connect failed'
+    return 'connect host failed'
 
 
-if not sut_os_connect():                         # if sut_os_connect_fail
-    return 'sut os connect failed'
+if not connect_client():
+    return 'connect host failed'
 
-if not sut_tool_exist():                         # if sut_tool_not_exist
-    return 'tool not exist'
+if not file_exist():
+    return 'file not exist'
 
-if not sut_bmc_version():                        # if sut_bmc_version_fail
-    return 'get BMC version failed'
+if not read_file():
+    return 'read file failed'
 
-# flash BMC
+# read file success
 ```
 
 ### 正向优先
@@ -85,35 +80,32 @@ else:
 ```python
  if num > 5:
     pass
-
-if 5 > num:
-    pass
-
 ```
 
 ## 边界
 
-简化边界问题,
-忽略或合并不关注的内容
+简化边界问题, 忽略或合并不关注的内容
 
 ```python
 
-if type(bkm) == int:
-    if type(bkms) == list:
-        if bkm in bkms:
-            return bkms.index(bkm)
+array = [1, 2, 3, 4, 5]
+
+if type(index) is int:
+    if index >= (-1 * len(array)):
+        if index < len(array):
+            return array[index]
         else:
-            return f'{bkm} not in {bkms}'
+            return f"{index} bigger than array length"
     else:
-        return f'{bkms} not a list'
+        return f'{index} less than 0'
 else:
-    return f'{bkm} type not int'
+    return f'{index} is not int'
 
-
+# 合并 index error 的多种情况
 try:
-    return bkms.index(bkm)
-except Exception as e:
-    return f'Get {bkm} index error'
+    return array[index]
+except IndexError as e:
+    return f'{index} error: {e}'
 ```
 
 ## 变量的逻辑
@@ -123,7 +115,7 @@ except Exception as e:
 
 ### 少创建无效变量
 
-变量越多负担越重
+变量越多负担越重  
 消除无效的中间变量
 
 ```python
@@ -147,19 +139,10 @@ else:
     print('stop test when error occurred')
 ```
 
-```python
-bmc_cmd = 'systemctl status docker'
-cmd_ret = subprocess.Popen(bmc_cmd)
-print(bmc_cmd)
-print(cmd_ret)
-
-run('systemctl status docker')
-```
-
 ### 减小变量作用域
 
 缩减变量作用域以减轻变量的追踪难度  
-减小变量的使用跨度
+减小变量的使用跨度, 变量定义尽量与使用位置接近
 
 ```python
 username = 'admin'
@@ -173,14 +156,14 @@ key = None
 value = None
 
 
-# read config
+# read config module
 config = {}
 config_valid = {}
 
-# set output file
+# set output module
 log_dir = 'reports/process.log'
 
-# test step
+# client module
 username = 'admin'
 password = 'admin'
 tool_dir = 'tools'

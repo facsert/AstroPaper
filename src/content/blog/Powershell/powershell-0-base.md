@@ -178,12 +178,10 @@ function myfunc($param1, $param2) {
 ## 特定变量
 
 ```powershell
-
 $?                                               # 上一条命令执行结果
 $false                                           # False
 $true                                            # True
 $null                                            # Null
 $PID                                             # 进程ID
 $PWD                                             # 当前目录
-
 ```

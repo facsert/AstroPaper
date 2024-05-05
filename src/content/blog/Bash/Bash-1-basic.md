@@ -34,7 +34,6 @@ Shell 是一个提供与用户对话的环境的程序; 又称为命令行环境
  > /bin/dash
  > /bin/ksh
  > /bin/sh
- > /bin/tcsh
  > /bin/zsh
 
  $ echo $SHELL                                   # 当前使用的 shell
@@ -42,7 +41,6 @@ Shell 是一个提供与用户对话的环境的程序; 又称为命令行环境
 
  $ chsh -s /bin/bash                             # 修改当前 shell 为 bash
  $ usermod --shell /bin/zsh root                 # 设置 root 用户默认 shell 为 zsh
-
  $ cat /etc/passwd |grep root                    # 查看 root 用户的默认 shell
 ```
 
@@ -60,6 +58,9 @@ BASH 基础语法
 
  $ command | <command> | <command>               # 命令管道
  $ cat log.txt | grep "3rd"                      # 管道前的值作为管道后命令的参数
+ > 3rd
+
+ $ grep "3rd" log.txt                            # 与上一命令等效
  > 3rd
 ```
 
@@ -91,8 +92,8 @@ Bash 使用 `#` 作为注释符号, 注释内容不会被执行
  $ printf "%s length is %.3f" "line" "4.53245"   # 字符串格式化
  > line length is 4.523
 
- $ printf "%-6s_%s" "left" "right"               # 默认右对齐, 带 - 左对齐, 数字表示占位
- > left  _rightf
+ $ printf "%-6s _ %s" "left" "right"               # 默认右对齐, 带 - 左对齐, 数字表示占位
+ > left   _ right
 ```
 
 ### 输出重定向
@@ -121,12 +122,13 @@ Bash 命令正确结果默认输出到标准输出, 错误内容输出到标准�
  > Mon Jul  3 23:05:38 CST 2023
 
  $ command > /dev/null                           # 命令标准输出写入 null, 即不显示正常结果
+ $ date >/dev/null
  >
 ```
 
 ## 变量
 
-BASH 变量默认为字符串, 想要操作字符串或者引用变量需要使用特殊符号
+BASH 变量默认为字符串, 想要操作字符串或者引用变量需要使用 `$` 符号
 
 ```bash
  $ <variable name>=<variable value>              # 变量定义
@@ -148,17 +150,18 @@ BASH 变量默认为字符串, 想要操作字符串或者引用变量需要使�
 
 ### 环境变量
 
-BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 用于保存环境信息
+在打开 BASH 时间, 有一些环境变量提前在 shell 中定义, 这些变量往往有特殊含义
 
 ```bash
  $ env                                           # 显示所有环境变量
 
- $ echo "path: $HOME user: $USER"                # 打印用户目录和用户
- > path: /root user: root
+ $ echo "path: $HOME, user: $USER"                # 打印用户目录和用户
+ > path: /root, user: root
 
  $ echo $PATH                                    # 运行环境目录组成的列表
+ $ echo $PWD                                     # 打印当前目录
 
- $ export <var>=<val>                            # 自定义环境变量, 新开窗口或重启失效
+ $ export <var>=<val>                            # 自定义当前命令行环境变量, 新开窗口或重启失效
  $ unset <var>                                   # 删除变量, 环境变量和自定义变量均可
  $ set                                           # 显示所有 shell 变量
 ```
@@ -170,10 +173,11 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
 ```bash
  $ $<char>                                       # 如 $? $! 等特殊含义变量
 
- $ echo "last command return: $?"                # 上个命令返回值
- > last command return: 0                        # 0 表示命令执行成功, 其它表示失败或错误
+ $ date;echo "date command return: $?"           # 上个命令返回值
+ > Sat May  4 10:11:22 PM CST 2024
+ > date command return: 0                        # 0 表示命令执行成功, 其它表示失败或错误
 
- $ echo "Process ID: $$"                         # 当前进程 ID
+ $ echo "Process ID: $$"                         # 当前 shell 进程 ID
  > Process ID: 12345                             # 12345 为当前 shell 进程 ID
 ```
 
@@ -198,7 +202,7 @@ BASH 环境中的变量, 系统自定义的全局变量, 变量名全为大写, 
  $ declare <opt> <var>=<val>                     # 定义特殊类型变量
 
  $ declare -i int1=8 int2=6 sum                  # 定义整数变量, 可直接数学运算
- $ sum=int1*int2; echo $sum                      # 声明整数变量可直接数学运算
+ $ sum=int1+int2; echo $sum                      # 声明整数变量可直接数学运算( + 左右不能有空格)
  > 14
 
  $ declare -a arr=(1 2 3)                        # 定义数组变量
@@ -234,11 +238,11 @@ BASH 区分单引号和双引号, 单引号内全部为当做字符, 双引号�
 反引号用于执行命令, 一般用于将命令结果赋值给变量
 
 ```bash
- $ time=`date`                                   # 将 data 命令结果赋值给 time
- $ echo "$time"                                  # 打印变量值
- > Wed Aug 10 21:49:38 HKT 2022
+ $ echo date, `date`
+ > date, Sat May 4 10:16:10 PM CST 2024          # 反引号会执行包含的内容
 
- $ time=$(date)                                  # 与反引号效果一致
+ $ echo date, $(date)                            # 与反引号效果一致
+ > date, Sat May 4 10:18:29 PM CST 2024
 ```
 
 由于反引号易于与单引号混淆, 建议使用 `$()` 方式, 便于区分

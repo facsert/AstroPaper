@@ -69,8 +69,10 @@ SELECT id,name FROM students;
 SELECT * FROM students
 WHERE age IS NOT NULL;
 
+/* 查询18、19、20岁的学生, 并从大到小排序 */
 SELECT * FROM students
-WHERE age IN (18,19,20);
+WHERE age IN (18,19,20)
+ORDER BY age DESC;
 ```
 
 ## 插入数据

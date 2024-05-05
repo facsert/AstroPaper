@@ -1,7 +1,7 @@
 ---
 author: facsert
 pubDatetime: 2023-10-09 20:03:44
-modDatetime: 
+modDatetime:
 title: 04.Bash Function
 slug: 04.Bash Function
 featured: false
@@ -76,15 +76,16 @@ func 1st 2nd 3rd                                 # 函数调用
 ## 函数返回
 
 使用 `return` 返回函数值, 返回值只能是数字  
-一般使用 `0` 表示执行成功, `1` 表示执行失败
+一般使用 `0` 表示执行成功, `1` 获取其他数字表示执行失败
 
 ```bash
-function max() {                                 # 定义函数
-    [[ $1 -gt $2 ]] && return $1 || return $2    # 返回值只允许数字
+function bigger() {                              # 定义函数
+    [[ $1 -gt $2 ]] && return 0 || return 1      # 返回值只允许数字
 }
 
-$ max 7 3; echo "max: $?"                        # 函数调用, 使用 $? 获取函数返回值
-> max: 7                                         # 打印函数返回值
+$ num1=7; num2=3; bigger num1 num2               # 变量定义, 函数调用
+$ [[ $? -eq 0 ]] && echo "$num1 bigger" || echo "$num2 bigger"
+> 7 bigger
 ```
 
 ## 变量作用域

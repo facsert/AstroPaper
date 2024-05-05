@@ -27,13 +27,11 @@ CREATE DATABASE database_name WITH
   CONNECTION LIMIT  = max_concurrent_connection  /* 最大连接数(默认 -1, 表示无限制) */
   IS_TEMPLATE       = true | false ;             /* 是否为模板数据库 */
 
-
 /* 创建数据库示例 */
 CREATE DATABASE db WITH
   OWNER = postgres
   ENCODING = 'UTF8'
   CONNECTION LIMIT = 100;
-
 ```
 
 ```sql

@@ -19,22 +19,13 @@ description: ""
 
 ## Table of Contents
 
-- 风格
-- 命名
-- 注释
+## 规则
 
-## 风格
-
-- 空格
-- 对齐
-- 换行
-- 一致性
-
-使用空格, 对齐, 换行的规则形成代码风格
+确定代码空格, 对齐, 换行的规则
 
 ### 空格
 
-使用空格使运算语句更清晰, 分隔多个数据, 参数
+使用空格使运算语句更清晰, 分隔多个数据或参数
 
 ```python
  4 + 2                                           # 6 二元运算
@@ -52,6 +43,8 @@ description: ""
  func(msg='hello', name='petter')                # 参数之间空格区分
 ```
 
+无需空格的代码
+
 ```javascript
  !true                                           // false 非运算 一元运算
  ~2                                              // -3 按位取反
@@ -61,17 +54,27 @@ description: ""
 
 ### 对齐
 
-通过空格与缩进区分代码所属区域
+通过缩进区分代码所属区域, 同层级的代码对齐
 
 ```javascript
 if (count) {
+  // 通过缩进区分代码所属区域
   while (count--) {
-    // while 循环在 if 条件下
-    console.log(count); // 打印操作在 while 循环内
+    console.log(count);
   }
-
   console.log("while cycle over"); // 循环结束后打印结果
 }
+```
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
 ```
 
 ```python
@@ -107,7 +110,6 @@ http.post(username='facser',  email='facser@example.com',  phone='12345678')
 http.post(username='kertory', email='kertory@example.com', phone='12345678')
 http.post(username='victory', email='victory@example.com', phone='12345678')
 http.post(username='petter',  email='petter@example.com',  phone='12345678')
-
 ```
 
 ### 空行
@@ -131,17 +133,17 @@ def connect_sut():
         exit()
 
     try:
-        run(config['Get_bios_attribute'], code=True)
-    except RuntimeError as _:
-        display('Get BIOS option failed ', False)
+        run(config['Get_bios_attribute'], timeout=30)
+    except TimeoutError as e:
+        display(f'Get BIOS option failed: {e}', False)
         exit()
 
-    display('Connect SUT successfully')
+    display('Connect SUT successfully', True)
 ```
 
-### 一致性
+### 单一规则
 
-在一个项目里只使用一种代码风格
+在一个项目里只使用一种代码规则
 
 1. 命名法(驼峰法, 蛇形命名)不要混用
 2. 相似的问题尽量使用同一种解决方式
@@ -225,16 +227,18 @@ err_test_msg                # 蛇形命名, 下划线 _ 区分断点
 
 ### 一致性
 
-项目中表示同样的值或类似的值, 命名方式应该一致
+项目中表示同样的值或类似的值, 命名方式保持一致或趋同
 
 ```python
-
+# 标题打印, 标题等级, 和标题填充长度
 def title(string='title', level=3, length=30):
     pass
 
+# 进度条打印, 等待时间, 是否显示进度条, 进度条长度
 def wait(delay=1, show=True, length=50):
     pass
 
+# ping 命令, 测试次数, 失败间隔等待时间, 是否显示命令打印
 def ping(host, count=3, delay=10, show=True):
     pass
 

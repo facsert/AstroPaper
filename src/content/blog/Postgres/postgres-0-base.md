@@ -125,5 +125,3 @@ select version();                                /* 显示版本信息 */
  # 退出容器后, 重启 postgres 容器
  $ docker restart postgres
 ```
-
-docker run -p 5432:5432 --name pg -e POSTGRES_PASSWORD=password -e TZ=Asia/Shanghai -v E:\文档\Postgres:/var/lib/postgresql/data -d postgres

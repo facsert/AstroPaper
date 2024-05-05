@@ -11,13 +11,7 @@ tags:
 description: "Grafana 是一个数据可视化工具"
 ---
 
-Grafana 是一个强大的可视化平台, 可以集成多种数据工具进行可视化
-
 ## Table of Contents
-
-## 介绍
-
-Grafana 是一个数据可视化工具, 可用将某数据源通过图表的方式呈现
 
 ## 安装
 

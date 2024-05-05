@@ -34,10 +34,10 @@ if <expression> ; then                           # expression 返回值为 0 表
 fi                                               # 分支语句结束
 
 if [[ 3 > 2 ]]; then                             #  3 > 2 条件成立
-    echo -e " 3 bigger thean 2\n"                # 执行打印
+    echo -e " 3 bigger than 2\n"                 # 执行打印
 fi
 
- $ if date; then echo "true"; fi                 # 命令执行成功也表示条件成立
+ $ if date; then echo "true"; fi                 # 命令执行成功(状态码为 0)也表示条件成立
  > Mon Aug 15 21:03:03 CST 2022                  # date 命令执行成功
  > true                                          # 执行分支代码
 ```
@@ -109,10 +109,10 @@ fi
  $ [ 3 -gt 3 ]                                   # greater than 大于
  $ [ 3 -ge 3 ]                                   # greater equal 大于等于
 
- $ [ 0 -ne 0 ]; echo $?
- > 0
+ $ [ 0 -ne 0 ]; echo $?                          # 0 不等于 0, 状态码为 1
+ > 1
 
- $ [ 3 > 2 ] && echo "true"                      # 执行命令 "3" 结果写入 2 文件, 执行成功打印 true
+ $ [ 3 > 2 ] && echo "true"                      # 注: 执行命令 "3" 结果写入 2 命名的文件, 执行成功打印 true
  > true
 ```
 
